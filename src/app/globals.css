@@ -9,16 +9,23 @@
   --vscode-editor-background: #1e1e1e;
   --vscode-menubar-background: #2c2c2c;
   --vscode-tab-bar-background: #252526;
-  --vscode-tab-inactive-background: #2d2d2d;
-  --vscode-tab-active-background: #1e1e1e;
-  --vscode-tab-hover-background: #3e3e3e; /* For inactive tab hover */
-  --vscode-tab-border: #252526;
-  --vscode-tab-active-border-bottom-color: #007acc; /* Accent color for active tab bottom line */
+  --vscode-tab-inactive-background: #2d2d2d; /* Standard inactive tab */
+  --vscode-tab-active-background: #1e1e1e; /* Editor background */
+  --vscode-tab-hover-background: #2a2d2e; /* Slightly lighter than inactive, as per req 6 */
+  --vscode-tab-border: #252526; /* Separator between tabs, often same as tab bar bg */
+  --vscode-tab-active-top-border-color: #007ACC; /* New: For active tab top border */
+  --vscode-tab-inactive-text-color: #CCCCCC; /* New: For inactive tab text */
+  --vscode-tab-active-text-color: #FFFFFF; /* New: For active tab text */
+  --vscode-tab-close-button-color: #BBBBBB; /* New: Default for close button */
+  --vscode-tab-close-button-hover-color: #FFFFFF; /* New: Hover for close button */
+
   --vscode-list-hover-background: #2a2d2e;
-  --vscode-border-color: #333333;
-  --vscode-text-primary: #cccccc;
-  --vscode-text-secondary: #8e8e8e;
-  --vscode-text-inverse: #ffffff;
+  --vscode-border-color: #333333; /* General border, like between sidebar/editor */
+
+  --vscode-text-primary: #cccccc; /* Default primary text on dark backgrounds */
+  --vscode-text-secondary: #8e8e8e; /* Default secondary text */
+  --vscode-text-inverse: #ffffff; /* Default text on very dark or accent backgrounds */
+
   --vscode-font-sans-family: 'Inter', var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --vscode-font-mono-family: 'Fira Code', var(--font-geist-mono), Menlo, Monaco, Consolas, "Courier New", monospace;
 
