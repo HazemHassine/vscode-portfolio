@@ -1,103 +1,232 @@
-import Image from "next/image";
+"use client"; // Required for useState and event handlers
 
-export default function Home() {
+import React, { useState } from 'react';
+import Sidebar from '../components/Sidebar';
+import TabBar from '../components/TabBar';
+import ContentArea from '../components/ContentArea';
+import { FiFileText, FiCode, FiTerminal, FiGitBranch } from 'react-icons/fi'; // Example icons
+import { DiJavascript1, DiMarkdown, DiReact } from 'react-icons/di'; // More specific icons
+
+const initialTabsData = [
+  {
+    id: 'about.md',
+    title: 'About.md',
+    icon: <DiMarkdown className="text-blue-400" />,
+    content: `
+# About Me
+
+Hello! I'm [Your Name], a passionate software developer with a love for creating elegant and efficient solutions.
+This portfolio is a small showcase of my journey into web development, styled after one of my favorite tools, VS Code.
+
+## Skills
+
+*   **Frontend:** React, Next.js, JavaScript (ES6+), TypeScript, HTML5, CSS3, Tailwind CSS
+*   **Backend:** Node.js, Express.js
+*   **Databases:** MongoDB, PostgreSQL
+*   **Tools:** Git, Docker, VS Code (of course!)
+
+## Interests
+
+*   Open Source Contributions
+*   Exploring new technologies
+*   Photography and Hiking
+    `,
+  },
+  {
+    id: 'projects.jsx',
+    title: 'Projects.jsx',
+    icon: <DiReact className="text-sky-400" />,
+    content: `
+// Projects.jsx
+// This file will showcase your projects using JSX.
+
+const ProjectCard = ({ name, description, stack, link }) => (
+  <div style={{ border: '1px solid #333', padding: '1rem', margin: '1rem 0', borderRadius: '5px' }}>
+    <h3 style={{ color: '#61dafb' }}>{name}</h3>
+    <p>{description}</p>
+    <p><strong>Stack:</strong> {stack.join(', ')}</p>
+    {link && <a href={link} target="_blank" rel="noopener noreferrer" style={{color: '#9f7aea'}}>View Project</a>}
+  </div>
+);
+
+const MyProjects = () => {
+  const projects = [
+    {
+      name: "VSCode Portfolio",
+      description: "This website! Built with Next.js, React, and Tailwind CSS to mimic the VS Code interface.",
+      stack: ["Next.js", "React", "Tailwind CSS", "react-icons"],
+      link: "#" // Link to this site's repo or live version
+    },
+    {
+      name: "E-commerce Platform",
+      description: "A full-featured online store with user authentication, product listings, and a shopping cart.",
+      stack: ["React", "Node.js", "Express", "MongoDB", "Stripe API"],
+      link: "#"
+    },
+    {
+      name: "Task Management App",
+      description: "A collaborative tool for teams to manage tasks and projects.",
+      stack: ["Vue.js", "Firebase Realtime Database", "Vuetify"],
+      link: "#"
+    }
+  ];
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div>
+      <h2>My Projects</h2>
+      {projects.map(project => <ProjectCard key={project.name} {...project} />)}
+    </div>
+  );
+};
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+// To render this in a real scenario, you'd do something like:
+// ReactDOM.render(<MyProjects />, document.getElementById('projects-container'));
+// For this placeholder, the string content itself is displayed.
+// The actual rendering would happen if this were a real JSX file being processed.
+// We are displaying the source code here.
+
+export default MyProjects;
+    `,
+  },
+  {
+    id: 'readme.md',
+    title: 'README.md',
+    icon: <DiMarkdown className="text-blue-400" />,
+    content: `
+# Portfolio Project: VSCode Edition
+
+This project is a personal portfolio website designed to mimic the look and feel of Visual Studio Code.
+It's built using modern web technologies to showcase my skills and projects in a familiar environment for developers.
+
+## Tech Stack
+
+*   **Framework:** Next.js (v13+ with App Router)
+*   **Language:** JavaScript (ES6+)
+*   **Styling:** Tailwind CSS
+*   **Icons:** react-icons
+*   **UI Components:** Custom-built React components
+
+## Features
+
+*   **VSCode Theming:** Dark theme matching default VSCode colors for sidebar, tabs, and editor pane.
+*   **Responsive Layout:** Adapts to different screen sizes.
+*   **Sidebar Navigation:** Easy access to different sections of the portfolio (About, Projects, etc.).
+*   **Tabbed Interface:** Content is displayed in tabs, similar to open files in VSCode.
+    *   Clickable tabs to switch content.
+    *   Active tab highlighting.
+    *   (Visual) Close button on active tabs.
+*   **Monospace Font:** Editor-like content area using 'Fira Code' or a similar monospace font.
+
+## Getting Started
+
+1.  Clone the repository:
+    \`git clone <repository-url>\`
+2.  Install dependencies:
+    \`npm install\`
+    or
+    \`yarn install\`
+3.  Run the development server:
+    \`npm run dev\`
+    or
+    \`yarn dev\`
+4.  Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Future Enhancements
+
+*   Fully functional tab closing and opening.
+*   Dynamic content loading for sections.
+*   Integration with a headless CMS for blog posts or project details.
+*   More interactive elements (e.g., a "working" terminal tab).
+    `,
+  },
+  {
+    id: 'skills.js',
+    title: 'Skills.js',
+    icon: <DiJavascript1 className="text-yellow-400" />,
+    content: `
+// skills.js - A list of my technical skills
+
+const skills = {
+  languages: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3", "Python", "SQL"],
+  frontend: {
+    frameworks_libraries: ["React", "Next.js", "Vue.js", "Angular", "Redux", "Zustand"],
+    styling: ["Tailwind CSS", "Sass/SCSS", "Styled Components", "Material-UI"],
+    tools: ["Webpack", "Babel", "ESLint", "Prettier"]
+  },
+  backend: {
+    frameworks_libraries: ["Node.js", "Express.js", "Django", "Flask"],
+    databases: ["MongoDB", "PostgreSQL", "MySQL", "Firebase Firestore"],
+    api: ["RESTful APIs", "GraphQL"]
+  },
+  devops_tools: ["Git", "GitHub/GitLab", "Docker", "Jenkins", "AWS (EC2, S3, Lambda)"],
+  testing: ["Jest", "React Testing Library", "Cypress", "Mocha", "Chai"],
+  other: ["Agile/Scrum methodologies", "Problem-solving", "Team collaboration"]
+};
+
+function printSkills(category, items) {
+  console.log(\`\\n--- \${category.toUpperCase()} ---\`);
+  if (Array.isArray(items)) {
+    items.forEach(item => console.log(\`- \${item}\`));
+  } else if (typeof items === 'object') {
+    for (const subCategory in items) {
+      printSkills(\`\${category} - \${subCategory.replace('_', ' ')}\`, items[subCategory]);
+    }
+  }
+}
+
+console.log("My Technical Skills Portfolio:");
+for (const category in skills) {
+  printSkills(category, skills[category]);
+}
+
+// This is a simplified representation.
+// In a real app, this data might be used to dynamically generate UI elements.
+    `
+  }
+];
+
+
+export default function HomePage() {
+  const [tabs, setTabs] = useState(initialTabsData);
+  const [activeTabId, setActiveTabId] = useState(initialTabsData[0].id);
+
+  const handleTabClick = (tabId) => {
+    setActiveTabId(tabId);
+  };
+
+  const handleTabClose = (tabIdToClose) => {
+    // Prevent closing the last tab
+    if (tabs.length === 1) return;
+
+    const tabIndex = tabs.findIndex(tab => tab.id === tabIdToClose);
+    const newTabs = tabs.filter((tab) => tab.id !== tabIdToClose);
+    setTabs(newTabs);
+
+    // If the closed tab was active, set a new active tab
+    if (activeTabId === tabIdToClose) {
+      if (newTabs.length > 0) {
+        // Try to activate the tab to the left, or the first tab if closing the first one
+        setActiveTabId(newTabs[Math.max(0, tabIndex -1)].id);
+      } else {
+        setActiveTabId(null); // Should not happen if we prevent closing last tab
+      }
+    }
+  };
+
+  const activeTabData = tabs.find(tab => tab.id === activeTabId);
+
+  return (
+    <div className="flex h-screen bg-[#1e1e1e] text-white overflow-hidden">
+      <Sidebar />
+      <div className="flex flex-col flex-grow min-w-0"> {/* min-w-0 is important for flex children to shrink properly */}
+        <TabBar
+          tabs={tabs}
+          activeTab={activeTabId}
+          onTabClick={handleTabClick}
+          onTabClose={handleTabClose}
+        />
+        <ContentArea activeTabData={activeTabData} />
+      </div>
     </div>
   );
 }

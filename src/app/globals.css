@@ -1,26 +1,86 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* VSCode Specific Colors - can be used in Tailwind config or here */
+  --vscode-editor-background: #1e1e1e;
+  --vscode-sidebar-background: #252526; /* Or #1e1e1e if sidebar is same as editor */
+  --vscode-tab-inactive-background: #2d2d2d;
+  --vscode-tab-active-background: #1e1e1e;
+  --vscode-text-primary: #d4d4d4;
+  --vscode-text-secondary: #808080;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: 'Fira Code', var(--font-geist-mono), monospace; /* Added Fira Code */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #0a0a0a; /* This is general dark mode, VSCode style is more specific */
     --foreground: #ededed;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--vscode-editor-background); /* Default body to editor bg for full-page app feel */
+  color: var(--vscode-text-primary);
+  font-family: var(--font-sans); /* Use sans-serif for UI elements outside editor */
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* Prevent body scroll, scrolling handled by components */
+}
+
+/* Smooth transitions for tab switching (optional, can be done with Tailwind too) */
+.tab-content-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.tab-content-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.tab-content-exit {
+  opacity: 1;
+}
+.tab-content-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+/* Custom scrollbar styling for a more VSCode like feel (optional) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #252526; /* Darker track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #424242; /* Slightly lighter thumb */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Lighter on hover */
+}
+
+/* Ensure html and body take full height for the sticky layout */
+html, body, #__next {
+  height: 100%;
+}
+
+/* Apply Fira Code to elements with font-mono (Tailwind class) */
+.font-mono {
+  font-family: 'Fira Code', Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
