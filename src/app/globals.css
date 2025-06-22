@@ -1,86 +1,109 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'); /* VSCode like UI font */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  /* VSCode Specific Colors - can be used in Tailwind config or here */
+  /* VSCode Specific Colors */
+  --vscode-activity-bar-background: #333333;
+  --vscode-sidebar-background: #252526;
   --vscode-editor-background: #1e1e1e;
-  --vscode-sidebar-background: #252526; /* Or #1e1e1e if sidebar is same as editor */
+  --vscode-menubar-background: #2c2c2c;
+  --vscode-tab-bar-background: #252526;
   --vscode-tab-inactive-background: #2d2d2d;
   --vscode-tab-active-background: #1e1e1e;
-  --vscode-text-primary: #d4d4d4;
-  --vscode-text-secondary: #808080;
+  --vscode-tab-hover-background: #3e3e3e; /* For inactive tab hover */
+  --vscode-tab-border: #252526;
+  --vscode-tab-active-border-bottom-color: #007acc; /* Accent color for active tab bottom line */
+  --vscode-list-hover-background: #2a2d2e;
+  --vscode-border-color: #333333;
+  --vscode-text-primary: #cccccc;
+  --vscode-text-secondary: #8e8e8e;
+  --vscode-text-inverse: #ffffff;
+  --vscode-font-sans-family: 'Inter', var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --vscode-font-mono-family: 'Fira Code', var(--font-geist-mono), Menlo, Monaco, Consolas, "Courier New", monospace;
+
+  /* Default theme variables, less critical as we hardcode dark theme */
+  --background: var(--vscode-editor-background);
+  --foreground: var(--vscode-text-primary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: 'Fira Code', var(--font-geist-mono), monospace; /* Added Fira Code */
+  --font-sans: var(--vscode-font-sans-family);
+  --font-mono: var(--vscode-font-mono-family);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a; /* This is general dark mode, VSCode style is more specific */
-    --foreground: #ededed;
-  }
-}
+/* No need for prefers-color-scheme: dark if always dark */
 
 body {
-  background: var(--vscode-editor-background); /* Default body to editor bg for full-page app feel */
+  background: var(--vscode-editor-background);
   color: var(--vscode-text-primary);
-  font-family: var(--font-sans); /* Use sans-serif for UI elements outside editor */
+  font-family: var(--vscode-font-sans-family);
   margin: 0;
   padding: 0;
   height: 100vh;
   width: 100vw;
-  overflow: hidden; /* Prevent body scroll, scrolling handled by components */
+  overflow: hidden;
 }
 
-/* Smooth transitions for tab switching (optional, can be done with Tailwind too) */
-.tab-content-enter {
+/* Smooth transitions for tab content */
+.content-fade-enter {
   opacity: 0;
-  transform: translateY(10px);
 }
-.tab-content-enter-active {
+.content-fade-enter-active {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms, transform 300ms;
+  transition: opacity 200ms ease-in-out;
 }
-.tab-content-exit {
+.content-fade-exit {
   opacity: 1;
 }
-.tab-content-exit-active {
+.content-fade-exit-active {
   opacity: 0;
-  transition: opacity 300ms;
+  transition: opacity 200ms ease-in-out;
 }
 
-/* Custom scrollbar styling for a more VSCode like feel (optional) */
+/* Minimal Scrollbar Styling (VSCode like) */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #252526; /* Darker track */
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #424242; /* Slightly lighter thumb */
-  border-radius: 5px;
+  background-color: rgba(121, 121, 121, 0.3); /* VSCode scrollbar color with some transparency */
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Lighter on hover */
+  background-color: rgba(121, 121, 121, 0.7);
 }
 
-/* Ensure html and body take full height for the sticky layout */
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(121, 121, 121, 0.3) transparent; /* thumb and track */
+}
+
+*:hover {
+  /* Firefox doesn't support changing scrollbar color on general element hover easily,
+     this will apply if the scrollbar itself is hovered. */
+  scrollbar-color: rgba(121, 121, 121, 0.7) transparent;
+}
+
+
 html, body, #__next {
   height: 100%;
 }
 
-/* Apply Fira Code to elements with font-mono (Tailwind class) */
+/* Ensure Tailwind's font classes use our defined families */
 .font-mono {
-  font-family: 'Fira Code', Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: var(--vscode-font-mono-family);
+}
+
+.font-sans {
+  font-family: var(--vscode-font-sans-family);
 }

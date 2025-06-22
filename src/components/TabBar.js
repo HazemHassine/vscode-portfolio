@@ -3,7 +3,7 @@ import TabItem from './TabItem';
 
 const TabBar = ({ tabs, activeTab, onTabClick, onTabClose }) => {
   return (
-    <div className="flex bg-[#252526] border-b border-gray-700 overflow-x-auto">
+    <div className="flex bg-[var(--vscode-tab-bar-background)] border-b border-[var(--vscode-border-color)] overflow-x-auto h-[40px] shrink-0"> {/* Fixed height for tab bar */}
       {tabs.map((tab) => (
         <TabItem
           key={tab.id}

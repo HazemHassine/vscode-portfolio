@@ -2,16 +2,19 @@
 
 import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
+import MenuBar from '../components/MenuBar'; // Import MenuBar
 import TabBar from '../components/TabBar';
 import ContentArea from '../components/ContentArea';
-import { FiFileText, FiCode, FiTerminal, FiGitBranch } from 'react-icons/fi'; // Example icons
-import { DiJavascript1, DiMarkdown, DiReact } from 'react-icons/di'; // More specific icons
+import { VscMarkdown, VscJson, VscTerminal, VscCode } from 'react-icons/vsc'; // Using VSC icons
+import { DiJsBadge, DiReact as DiReactIcon } from 'react-icons/di'; // Di for specific tech if Vsc not available or suitable
 
+// Updated initialTabsData to use Vsc icons or more appropriate ones
+// Updated initialTabsData to use Vsc icons or more appropriate ones
 const initialTabsData = [
   {
     id: 'about.md',
     title: 'About.md',
-    icon: <DiMarkdown className="text-blue-400" />,
+    icon: <VscMarkdown className="text-[var(--vscode-text-secondary)]" />, // Using Vsc icon
     content: `
 # About Me
 
@@ -35,13 +38,13 @@ This portfolio is a small showcase of my journey into web development, styled af
   {
     id: 'projects.jsx',
     title: 'Projects.jsx',
-    icon: <DiReact className="text-sky-400" />,
+    icon: <DiReactIcon className="text-sky-400" />, // DiReactIcon is more specific for JSX/React
     content: `
 // Projects.jsx
 // This file will showcase your projects using JSX.
 
 const ProjectCard = ({ name, description, stack, link }) => (
-  <div style={{ border: '1px solid #333', padding: '1rem', margin: '1rem 0', borderRadius: '5px' }}>
+  <div style={{ border: '1px solid #333', padding: '1rem', margin: '1rem 0', borderRadius: '5px', fontFamily: 'var(--vscode-font-sans-family)' }}>
     <h3 style={{ color: '#61dafb' }}>{name}</h3>
     <p>{description}</p>
     <p><strong>Stack:</strong> {stack.join(', ')}</p>
@@ -55,7 +58,7 @@ const MyProjects = () => {
       name: "VSCode Portfolio",
       description: "This website! Built with Next.js, React, and Tailwind CSS to mimic the VS Code interface.",
       stack: ["Next.js", "React", "Tailwind CSS", "react-icons"],
-      link: "#" // Link to this site's repo or live version
+      link: "#"
     },
     {
       name: "E-commerce Platform",
@@ -73,25 +76,18 @@ const MyProjects = () => {
 
   return (
     <div>
-      <h2>My Projects</h2>
+      <h2 style={{fontFamily: 'var(--vscode-font-sans-family)'}}>My Projects</h2>
       {projects.map(project => <ProjectCard key={project.name} {...project} />)}
     </div>
   );
 };
-
-// To render this in a real scenario, you'd do something like:
-// ReactDOM.render(<MyProjects />, document.getElementById('projects-container'));
-// For this placeholder, the string content itself is displayed.
-// The actual rendering would happen if this were a real JSX file being processed.
-// We are displaying the source code here.
-
-export default MyProjects;
+export default MyProjects; // Keep as string for pre tag
     `,
   },
   {
     id: 'readme.md',
     title: 'README.md',
-    icon: <DiMarkdown className="text-blue-400" />,
+    icon: <VscMarkdown className="text-[var(--vscode-text-secondary)]" />, // Using Vsc icon
     content: `
 # Portfolio Project: VSCode Edition
 
@@ -100,89 +96,61 @@ It's built using modern web technologies to showcase my skills and projects in a
 
 ## Tech Stack
 
-*   **Framework:** Next.js (v13+ with App Router)
-*   **Language:** JavaScript (ES6+)
+*   **Framework:** Next.js (App Router)
+*   **Language:** JavaScript (ES6+) / React
 *   **Styling:** Tailwind CSS
-*   **Icons:** react-icons
+*   **Icons:** react-icons (specifically Vsc for VSCode feel)
 *   **UI Components:** Custom-built React components
+*   **Transitions:** react-transition-group
 
 ## Features
 
-*   **VSCode Theming:** Dark theme matching default VSCode colors for sidebar, tabs, and editor pane.
-*   **Responsive Layout:** Adapts to different screen sizes.
-*   **Sidebar Navigation:** Easy access to different sections of the portfolio (About, Projects, etc.).
-*   **Tabbed Interface:** Content is displayed in tabs, similar to open files in VSCode.
-    *   Clickable tabs to switch content.
-    *   Active tab highlighting.
-    *   (Visual) Close button on active tabs.
-*   **Monospace Font:** Editor-like content area using 'Fira Code' or a similar monospace font.
+*   **VSCode Theming:** Dark theme matching default VSCode colors.
+*   **MenuBar:** Top application menu (File, Edit, etc.).
+*   **Sidebar (Explorer):** Fixed width, VSCode icons, hover effects.
+*   **Vertical Divider:** Separates Sidebar and Editor area.
+*   **Tabbed Interface:**
+    *   Rounded top corners for tabs.
+    *   Active tab highlighting (background and bottom border).
+    *   Hover-to-show close button on tabs.
+    *   Smooth content fade transition on tab switch.
+*   **Monospace Font:** Editor content area uses 'Fira Code'.
+*   **Custom Scrollbars:** Thin, minimal, auto-hiding style.
 
 ## Getting Started
 
-1.  Clone the repository:
-    \`git clone <repository-url>\`
-2.  Install dependencies:
-    \`npm install\`
-    or
-    \`yarn install\`
-3.  Run the development server:
-    \`npm run dev\`
-    or
-    \`yarn dev\`
-4.  Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Future Enhancements
-
-*   Fully functional tab closing and opening.
-*   Dynamic content loading for sections.
-*   Integration with a headless CMS for blog posts or project details.
-*   More interactive elements (e.g., a "working" terminal tab).
+1.  Clone the repository.
+2.  Install dependencies: \`npm install\`
+3.  Run dev server: \`npm run dev\`
+4.  Open [http://localhost:3000](http://localhost:3000).
     `,
   },
   {
-    id: 'skills.js',
-    title: 'Skills.js',
-    icon: <DiJavascript1 className="text-yellow-400" />,
-    content: `
-// skills.js - A list of my technical skills
-
-const skills = {
-  languages: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3", "Python", "SQL"],
-  frontend: {
-    frameworks_libraries: ["React", "Next.js", "Vue.js", "Angular", "Redux", "Zustand"],
-    styling: ["Tailwind CSS", "Sass/SCSS", "Styled Components", "Material-UI"],
-    tools: ["Webpack", "Babel", "ESLint", "Prettier"]
+    id: 'config.json', // Changed from skills.js to a JSON example
+    title: 'config.json',
+    icon: <VscJson className="text-yellow-400" />, // VscJson for JSON files
+    content: JSON.stringify(
+      {
+        "theme": "vscode-dark",
+        "fontSize": 14,
+        "fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+        "tabSize": 2,
+        "wordWrap": "on",
+        "lineNumbers": "on",
+        "explorer": {
+          "confirmDragAndDrop": false,
+          "iconTheme": "vscode-icons"
+        },
+        "workbench": {
+          "colorTheme": "Default Dark+",
+          "activityBar": { "visible": true },
+          "statusBar": { "visible": true }
+        }
+      },
+      null,
+      2 // Indentation for pretty printing
+    ),
   },
-  backend: {
-    frameworks_libraries: ["Node.js", "Express.js", "Django", "Flask"],
-    databases: ["MongoDB", "PostgreSQL", "MySQL", "Firebase Firestore"],
-    api: ["RESTful APIs", "GraphQL"]
-  },
-  devops_tools: ["Git", "GitHub/GitLab", "Docker", "Jenkins", "AWS (EC2, S3, Lambda)"],
-  testing: ["Jest", "React Testing Library", "Cypress", "Mocha", "Chai"],
-  other: ["Agile/Scrum methodologies", "Problem-solving", "Team collaboration"]
-};
-
-function printSkills(category, items) {
-  console.log(\`\\n--- \${category.toUpperCase()} ---\`);
-  if (Array.isArray(items)) {
-    items.forEach(item => console.log(\`- \${item}\`));
-  } else if (typeof items === 'object') {
-    for (const subCategory in items) {
-      printSkills(\`\${category} - \${subCategory.replace('_', ' ')}\`, items[subCategory]);
-    }
-  }
-}
-
-console.log("My Technical Skills Portfolio:");
-for (const category in skills) {
-  printSkills(category, skills[category]);
-}
-
-// This is a simplified representation.
-// In a real app, this data might be used to dynamically generate UI elements.
-    `
-  }
 ];
 
 
@@ -195,20 +163,16 @@ export default function HomePage() {
   };
 
   const handleTabClose = (tabIdToClose) => {
-    // Prevent closing the last tab
     if (tabs.length === 1) return;
-
     const tabIndex = tabs.findIndex(tab => tab.id === tabIdToClose);
     const newTabs = tabs.filter((tab) => tab.id !== tabIdToClose);
     setTabs(newTabs);
 
-    // If the closed tab was active, set a new active tab
     if (activeTabId === tabIdToClose) {
       if (newTabs.length > 0) {
-        // Try to activate the tab to the left, or the first tab if closing the first one
-        setActiveTabId(newTabs[Math.max(0, tabIndex -1)].id);
+        setActiveTabId(newTabs[Math.max(0, tabIndex - 1)].id);
       } else {
-        setActiveTabId(null); // Should not happen if we prevent closing last tab
+        setActiveTabId(null);
       }
     }
   };
@@ -216,9 +180,12 @@ export default function HomePage() {
   const activeTabData = tabs.find(tab => tab.id === activeTabId);
 
   return (
-    <div className="flex h-screen bg-[#1e1e1e] text-white overflow-hidden">
+    <div className="flex h-screen bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
       <Sidebar />
-      <div className="flex flex-col flex-grow min-w-0"> {/* min-w-0 is important for flex children to shrink properly */}
+      <div className="w-px bg-[var(--vscode-border-color)] shrink-0"></div>
+
+      <div className="flex flex-col flex-grow min-w-0">
+        <MenuBar /> {/* Added MenuBar here */}
         <TabBar
           tabs={tabs}
           activeTab={activeTabId}
