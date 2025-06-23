@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import FileExplorer from '../components/FileExplorer';
+import SourceControl from '../components/SourceControl';
 import MenuBar from '../components/MenuBar'; // Import MenuBar
 import TabBar from '../components/TabBar';
 import StatusBar from '../components/StatusBar';
@@ -11,12 +12,11 @@ import { VscMarkdown, VscJson, VscTerminal, VscCode } from 'react-icons/vsc'; //
 import { DiJsBadge, DiReact as DiReactIcon } from 'react-icons/di'; // Di for specific tech if Vsc not available or suitable
 
 // Updated initialTabsData to use Vsc icons or more appropriate ones
-// Updated initialTabsData to use Vsc icons or more appropriate ones
 const initialTabsData = [
   {
     id: 'about.md',
     title: 'About.md',
-    icon: <VscMarkdown className="text-[var(--vscode-text-secondary)]" />, // Using Vsc icon
+    icon: <VscMarkdown className="text-[var(--vscode-text-secondary)]" />,
     content: `
 # About Me
 
@@ -188,7 +188,8 @@ export default function HomePage() {
         <ActivityBar />
         <div className='w-full'>
           <div className="flex h-screen bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
-            <FileExplorer />
+            {/* <FileExplorer /> */}
+            <SourceControl />
             <div className="w-px bg-[var(--vscode-border-color)] shrink-0"></div>
 
             <div className="flex flex-col flex-grow min-w-0 w-full">
