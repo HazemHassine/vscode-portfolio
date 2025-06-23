@@ -1,4 +1,6 @@
 import React from 'react';
+import VscodeImage from '../../public/VScode_image.png';
+import Image from 'next/image';
 
 const menuItems = [
   { name: 'File', action: () => console.log('File clicked') },
@@ -15,9 +17,10 @@ const MenuBar = () => {
   return (
     <nav className="flex items-center bg-[var(--vscode-menubar-background)] text-[var(--vscode-text-primary)] px-2 h-[30px] shrink-0 border-b border-[var(--vscode-border-color)]">
       {/* Optional: App Icon / Logo, similar to VSCode's */}
+      <Image src={VscodeImage} alt="VSCode Logo" className="w-5 h-5 mr-2" />
       {/* <div className="px-2 mr-2">
-        <VscCode className="w-5 h-5 text-blue-500" /> {}
-      </div> */}
+        <VscodeImage className="w-5 h-5 text-blue-500" /> {}
+      </div>  */}
 
       <ul className="flex items-center h-full">
         {menuItems.map((item) => (

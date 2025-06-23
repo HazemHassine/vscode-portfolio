@@ -1,10 +1,12 @@
 "use client"; // Required for useState and event handlers
 
 import React, { useState } from 'react';
-import Sidebar from '../components/Sidebar';
+import FileExplorer from '../components/FileExplorer';
 import MenuBar from '../components/MenuBar'; // Import MenuBar
 import TabBar from '../components/TabBar';
+import StatusBar from '../components/StatusBar';
 import ContentArea from '../components/ContentArea';
+import ActivityBar from '../components/ActivityBar'; // Import ActivityBar
 import { VscMarkdown, VscJson, VscTerminal, VscCode } from 'react-icons/vsc'; // Using VSC icons
 import { DiJsBadge, DiReact as DiReactIcon } from 'react-icons/di'; // Di for specific tech if Vsc not available or suitable
 
@@ -180,19 +182,29 @@ export default function HomePage() {
   const activeTabData = tabs.find(tab => tab.id === activeTabId);
 
   return (
-    <div className="flex h-screen bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
-      <Sidebar />
-      <div className="w-px bg-[var(--vscode-border-color)] shrink-0"></div>
+    <div>
+      <MenuBar /> {/* Added MenuBar here */}
+      <div className='flex h-screen'>
+        <ActivityBar />
+        <div className='w-full'>
+          <div className="flex h-screen bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
+            <FileExplorer />
+            <div className="w-px bg-[var(--vscode-border-color)] shrink-0"></div>
 
-      <div className="flex flex-col flex-grow min-w-0">
-        <MenuBar /> {/* Added MenuBar here */}
-        <TabBar
-          tabs={tabs}
-          activeTab={activeTabId}
-          onTabClick={handleTabClick}
-          onTabClose={handleTabClose}
-        />
-        <ContentArea activeTabData={activeTabData} />
+            <div className="flex flex-col flex-grow min-w-0 w-full">
+              <TabBar
+                tabs={tabs}
+                activeTab={activeTabId}
+                onTabClick={handleTabClick}
+                onTabClose={handleTabClose}
+              />
+              <ContentArea activeTabData={activeTabData} />
+            </div>
+          </div>
+          <div className="fixed bottom-0 left-0 right-0 z-10">
+            <StatusBar />
+          </div>
+        </div>
       </div>
     </div>
   );
