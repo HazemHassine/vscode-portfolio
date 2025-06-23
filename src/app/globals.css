@@ -1,26 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'); /* VSCode like UI font */
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* VSCode Specific Colors */
+  --vscode-activity-bar-background: #333333;
+  --vscode-sidebar-background: #252526;
+  --vscode-editor-background: #1e1e1e;
+  --vscode-menubar-background: #2c2c2c;
+  --vscode-tab-bar-background: #252526;
+  --vscode-tab-inactive-background: #2d2d2d; /* Standard inactive tab */
+  --vscode-tab-active-background: #1e1e1e; /* Editor background */
+  --vscode-tab-hover-background: #2a2d2e; /* Slightly lighter than inactive, as per req 6 */
+  --vscode-tab-border: #252526; /* Separator between tabs, often same as tab bar bg */
+  --vscode-tab-active-top-border-color: #007ACC; /* New: For active tab top border */
+  --vscode-tab-inactive-text-color: #CCCCCC; /* New: For inactive tab text */
+  --vscode-tab-active-text-color: #FFFFFF; /* New: For active tab text */
+  --vscode-tab-close-button-color: #BBBBBB; /* New: Default for close button */
+  --vscode-tab-close-button-hover-color: #FFFFFF; /* New: Hover for close button */
+
+  --vscode-list-hover-background: #2a2d2e;
+  --vscode-border-color: #333333; /* General border, like between sidebar/editor */
+
+  --vscode-text-primary: #cccccc; /* Default primary text on dark backgrounds */
+  --vscode-text-secondary: #8e8e8e; /* Default secondary text */
+  --vscode-text-inverse: #ffffff; /* Default text on very dark or accent backgrounds */
+
+  --vscode-font-sans-family: 'Inter', var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --vscode-font-mono-family: 'Fira Code', var(--font-geist-mono), Menlo, Monaco, Consolas, "Courier New", monospace;
+
+  /* Default theme variables, less critical as we hardcode dark theme */
+  --background: var(--vscode-editor-background);
+  --foreground: var(--vscode-text-primary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--vscode-font-sans-family);
+  --font-mono: var(--vscode-font-mono-family);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* No need for prefers-color-scheme: dark if always dark */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--vscode-editor-background);
+  color: var(--vscode-text-primary);
+  font-family: var(--vscode-font-sans-family);
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Smooth transitions for tab content */
+.content-fade-enter {
+  opacity: 0;
+}
+.content-fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in-out;
+}
+.content-fade-exit {
+  opacity: 1;
+}
+.content-fade-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+/* Minimal Scrollbar Styling (VSCode like) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(121, 121, 121, 0.3); /* VSCode scrollbar color with some transparency */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(121, 121, 121, 0.7);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(121, 121, 121, 0.3) transparent; /* thumb and track */
+}
+
+*:hover {
+  /* Firefox doesn't support changing scrollbar color on general element hover easily,
+     this will apply if the scrollbar itself is hovered. */
+  scrollbar-color: rgba(121, 121, 121, 0.7) transparent;
+}
+
+
+html, body, #__next {
+  height: 100%;
+}
+
+/* Ensure Tailwind's font classes use our defined families */
+.font-mono {
+  font-family: var(--vscode-font-mono-family);
+}
+
+.font-sans {
+  font-family: var(--vscode-font-sans-family);
 }

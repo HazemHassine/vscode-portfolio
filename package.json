@@ -9,15 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vscode/codicons": "^0.0.36",
+    "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.3.4"
+    "react-icons": "^5.5.0",
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4"
   }
 }
