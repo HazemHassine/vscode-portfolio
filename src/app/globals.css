@@ -8,28 +8,52 @@
   --vscode-sidebar-background: #252526;
   --vscode-editor-background: #1e1e1e;
   --vscode-menubar-background: #2c2c2c;
+  --vscode-panel-background: #1e1e1e;
+  --vscode-panel-tab-activeForeground: #ffffff;
+  --vscode-panel-tab-inactiveForeground: #8e8e8e;
+  
   --vscode-tab-bar-background: #252526;
-  --vscode-tab-inactive-background: #2d2d2d; /* Standard inactive tab */
-  --vscode-tab-active-background: #1e1e1e; /* Editor background */
-  --vscode-tab-hover-background: #2a2d2e; /* Slightly lighter than inactive, as per req 6 */
-  --vscode-tab-border: #252526; /* Separator between tabs, often same as tab bar bg */
-  --vscode-tab-active-top-border-color: #007ACC; /* New: For active tab top border */
-  --vscode-tab-inactive-text-color: #CCCCCC; /* New: For inactive tab text */
-  --vscode-tab-active-text-color: #FFFFFF; /* New: For active tab text */
-  --vscode-tab-close-button-color: #BBBBBB; /* New: Default for close button */
-  --vscode-tab-close-button-hover-color: #FFFFFF; /* New: Hover for close button */
-
+  --vscode-tab-inactive-background: #2d2d2d;
+  --vscode-tab-active-background: #1e1e1e;
+  --vscode-tab-hover-background: #2a2d2e;
+  --vscode-tab-border: #252526;
+  --vscode-tab-active-top-border-color: #007ACC;
+  --vscode-tab-inactive-text-color: #CCCCCC;
+  --vscode-tab-active-text-color: #FFFFFF;
+  --vscode-tab-close-button-color: #BBBBBB;
+  --vscode-tab-close-button-hover-color: #FFFFFF;
+  
   --vscode-list-hover-background: #2a2d2e;
-  --vscode-border-color: #333333; /* General border, like between sidebar/editor */
+  --vscode-border-color: #333333;
 
-  --vscode-text-primary: #cccccc; /* Default primary text on dark backgrounds */
-  --vscode-text-secondary: #8e8e8e; /* Default secondary text */
-  --vscode-text-inverse: #ffffff; /* Default text on very dark or accent backgrounds */
+  --vscode-text-primary: #cccccc;
+  --vscode-text-secondary: #8e8e8e;
+  --vscode-text-inverse: #ffffff;
 
-  --vscode-font-sans-family: 'Inter', var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --vscode-font-mono-family: 'Fira Code', var(--font-geist-mono), Menlo, Monaco, Consolas, "Courier New", monospace;
+  --vscode-font-sans-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --vscode-font-mono-family: 'Fira Code', Menlo, Monaco, Consolas, "Courier New", monospace;
 
-  /* Default theme variables, less critical as we hardcode dark theme */
+  /* Terminal ANSI Colors */
+  --vscode-terminal-background: #1e1e1e;
+  --vscode-terminal-foreground: #cccccc;
+  --vscode-terminal-ansi-black: #000000;
+  --vscode-terminal-ansi-red: #cd3131;
+  --vscode-terminal-ansi-green: #0dbc79;
+  --vscode-terminal-ansi-yellow: #e5e510;
+  --vscode-terminal-ansi-blue: #2472c8;
+  --vscode-terminal-ansi-magenta: #bc3fbc;
+  --vscode-terminal-ansi-cyan: #11a8cd;
+  --vscode-terminal-ansi-white: #e5e5e5;
+  --vscode-terminal-ansi-bright-black: #666666;
+  --vscode-terminal-ansi-bright-red: #f14c4c;
+  --vscode-terminal-ansi-bright-green: #23d18b;
+  --vscode-terminal-ansi-bright-yellow: #f5f543;
+  --vscode-terminal-ansi-bright-blue: #3b8eea;
+  --vscode-terminal-ansi-bright-magenta: #d670d6;
+  --vscode-terminal-ansi-bright-cyan: #29b8db;
+  --vscode-terminal-ansi-bright-white: #e5e5e5;
+
+  /* Default theme variables */
   --background: var(--vscode-editor-background);
   --foreground: var(--vscode-text-primary);
 }
@@ -40,8 +64,6 @@
   --font-sans: var(--vscode-font-sans-family);
   --font-mono: var(--vscode-font-mono-family);
 }
-
-/* No need for prefers-color-scheme: dark if always dark */
 
 body {
   background: var(--vscode-editor-background);
@@ -81,7 +103,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(121, 121, 121, 0.3); /* VSCode scrollbar color with some transparency */
+  background-color: rgba(121, 121, 121, 0.3);
   border-radius: 4px;
 }
 
@@ -92,15 +114,12 @@ body {
 /* For Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(121, 121, 121, 0.3) transparent; /* thumb and track */
+  scrollbar-color: rgba(121, 121, 121, 0.3) transparent;
 }
 
 *:hover {
-  /* Firefox doesn't support changing scrollbar color on general element hover easily,
-     this will apply if the scrollbar itself is hovered. */
   scrollbar-color: rgba(121, 121, 121, 0.7) transparent;
 }
-
 
 html, body, #__next {
   height: 100%;

@@ -14,8 +14,8 @@ import { BsDot } from "react-icons/bs";
 
 const placeholderRepos = [
   { name: "vscode-portfolio", branch: "main", dirty: true },
-  { name: "blog",          branch: "develop", dirty: false },
-  { name: "api-server",    branch: "feature/ui", dirty: false },
+  { name: "blog", branch: "develop", dirty: false },
+  { name: "api-server", branch: "feature/ui", dirty: false },
 ];
 
 export default function SourceControl() {
@@ -41,14 +41,13 @@ export default function SourceControl() {
         bg-[var(--vscode-tab-bar-background)]"
       >
         <div className="flex items-center space-x-2">
-          <VscSourceControl size={16} />
           <span className="text-[11px] font-semibold uppercase text-[var(--vscode-text-secondary)]">
             SOURCE CONTROL
           </span>
         </div>
         <button
           title="Refresh All"
-          className="p-1 rounded hover:bg-[var(--vscode-list-hover-background)]
+          className="p-1 rounded hover:cursor-pointer hover:bg-[var(--vscode-list-hover-background)]
             hover:text-[var(--vscode-text-inverse)] transition-colors duration-150"
         >
           <VscRefresh size={16} />
@@ -96,9 +95,24 @@ export default function SourceControl() {
                     {r.dirty && <span className="flex items-center font-bold text-xl justify-center text-orange-300 pl-1">•</span>}
                   </div>
                   <div className="flex items-center space-x-1">
-                    <VscGitPullRequest className="hover:bg-[var(--vscode-list-hover-background)]" size={14} title="Pull" />
-                    <VscCloudUpload  className="hover:bg-[var(--vscode-list-hover-background)]" size={14} title="Push" />
-                    <VscSync  className="hover:bg-[var(--vscode-list-hover-background)]" size={14} title="Sync" />
+                    <button
+                      title="Pull"
+                      className="p-1 rounded hover:cursor-pointer hover:bg-[var(--vscode-list-hover-background)] hover:text-[var(--vscode-text-inverse)] transition-colors"
+                    >
+                      <VscGitPullRequest size={14} />
+                    </button>
+                    <button
+                      title="Push"
+                      className="p-1 rounded hover:cursor-pointer hover:bg-[var(--vscode-list-hover-background)] hover:text-[var(--vscode-text-inverse)] transition-colors"
+                    >
+                      <VscCloudUpload size={14} />
+                    </button>
+                    <button
+                      title="Sync"
+                      className="p-1 rounded hover:cursor-pointer hover:bg-[var(--vscode-list-hover-background)] hover:text-[var(--vscode-text-inverse)] transition-colors"
+                    >
+                      <VscSync size={14} />
+                    </button>
                   </div>
                 </div>
               );
