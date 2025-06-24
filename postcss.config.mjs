@@ -2,8 +2,8 @@ const config = {
   plugins: {
     "tailwindcss/nesting": {},
     "tailwindcss": {},
-    "@tailwindcss/typography": {},
     "autoprefixer": {},
+    "@tailwindcss/typography": {},
   },
 };
 
