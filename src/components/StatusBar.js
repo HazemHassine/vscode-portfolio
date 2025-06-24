@@ -16,14 +16,12 @@ const RemoteSSHIcon = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    {/* Top-left to bottom-right */}
     <path
       d="M3 3 L13 13"
       stroke="#FFFFFF"
       strokeWidth="2"
       strokeLinecap="butt"
     />
-    {/* Top-right to bottom-left */}
     <path
       d="M13 3 L3 13"
       stroke="#FFFFFF"

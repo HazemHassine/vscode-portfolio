@@ -12,16 +12,14 @@ const ContentArea = ({ activeTabData }) => {
       <SwitchTransition mode="out-in">
         <CSSTransition
           key={activeTabData ? activeTabData.id : 'empty'}
-          nodeRef={nodeRef}  // Pass the ref here
+          nodeRef={nodeRef}
           addEndListener={(done) => {
             if (nodeRef.current) {
               nodeRef.current.addEventListener("transitionend", done, false);
             }
           }}
-          // classNames="content-fade"
           timeout={0}
         >
-          {/* Attach ref here */}
           <div ref={nodeRef}>
             {!activeTabData ? (
               <div className="flex items-center justify-center h-full text-[var(--vscode-text-secondary)]">

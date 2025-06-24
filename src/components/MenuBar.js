@@ -125,7 +125,6 @@ const menuItems = [
   },
 ];
 
-// Recursive Dropdown item renderer with divider support
 const DropdownItem = ({ item }) => {
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const ref = useRef();

@@ -11,11 +11,6 @@ import {
   VscChromeClose
 } from 'react-icons/vsc';
 
-/**
- * TerminalView
- * Fully styled VS Code terminal panel including panel tabs and session controls.
- * Adds basic command handling and keeps prompt/view always visible.
- */
 const TerminalView = () => {
   const [history, setHistory] = useState([
     { type: 'info', text: 'Type help to see available commands.' }

@@ -1,12 +1,11 @@
 import React from 'react';
-import { FaTimes } from 'react-icons/fa';
 import { IoCloseOutline } from "react-icons/io5";
 
 const TabItem = ({ title, icon, isActive, onClick, onClose }) => {
   let baseClasses = "flex items-center justify-between pl-3 h-9 cursor-pointer ";
   baseClasses += "font-mono text-sm ";
   baseClasses += "border-r border-[var(--vscode-tab-border)] ";
-  baseClasses += "min-w-0 transition-colors duration-100 ";
+  baseClasses += "min-w-0 transition-colors duration-100";
 
   let topBorderClasses = "border-t-4 ";
 
@@ -36,7 +35,6 @@ const TabItem = ({ title, icon, isActive, onClick, onClose }) => {
         <span className="truncate leading-none">{title}</span>
       </div>
 
-      {/* Close button uses FaTimes icon */}
       <button
         onClick={(e) => {
           e.stopPropagation();

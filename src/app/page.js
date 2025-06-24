@@ -22,7 +22,7 @@ const initialTabsData = [
     content: `
 # About Me
 
-Hello! I'm [Your Name], a passionate software developer with a love for creating elegant and efficient solutions.
+Hello! I'm Hazem, a passionate software developer with a love for creating elegant and efficient solutions.
 This portfolio is a small showcase of my journey into web development, styled after one of my favorite tools, VS Code.
 
 ## Skills
@@ -45,7 +45,6 @@ This portfolio is a small showcase of my journey into web development, styled af
     icon: <DiReactIcon className="text-sky-400" />,
     content: `
 // Projects.jsx
-// This file will showcase your projects using JSX.
 
 const ProjectCard = ({ name, description, stack, link }) => (
   <div style={{ border: '1px solid #333', padding: '1rem', margin: '1rem 0', borderRadius: '5px', fontFamily: 'var(--vscode-font-sans-family)' }}>
@@ -85,7 +84,7 @@ const MyProjects = () => {
     </div>
   );
 };
-export default MyProjects; // Keep as string for pre tag
+export default MyProjects;
     `,
   },
   {
@@ -192,19 +191,16 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col h-screen">
-      {/* Top Menu Bar */}
       <MenuBar />
 
-      {/* Main area: ActivityBar + Editor + Terminal */}
       <div className="flex flex-grow overflow-hidden">
         <ActivityBar setActivePanel={setActivePanel} />
 
         <div className="flex flex-col flex-grow overflow-hidden">
-          {/* Editor pane */}
           <div className="flex flex-grow bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
             {activePanel === "explorer" && <FileExplorer />}
-            {activePanel === "scm"      && <SourceControl />}
-            {activePanel === "search"   && <SearchPanel />}
+            {activePanel === "scm" && <SourceControl />}
+            {activePanel === "search" && <SearchPanel />}
             <div className="w-px bg-[var(--vscode-border-color)] shrink-0" />
             <div className="flex flex-col flex-grow min-w-0">
               <TabBar
@@ -220,7 +216,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Bottom Status Bar */}
       <StatusBar />
     </div>
   );

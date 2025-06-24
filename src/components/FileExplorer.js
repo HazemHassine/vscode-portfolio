@@ -13,7 +13,6 @@ import {
   VscRefresh,
   VscCollapseAll,
 } from "react-icons/vsc";
-import { BsDot } from "react-icons/bs";
 
 // .git folder contents
 const gitFolderContents = [
@@ -266,7 +265,7 @@ const FileExplorer = () => {
 
       {/* Footer */}
       <div className="p-3 border-t border-[var(--vscode-border-color)] text-xs text-center text-[var(--vscode-text-secondary)] bg-[var(--vscode-tab-bar-background)]">
-        <p>&copy; {new Date().getFullYear()} Your Name</p>
+        <p>&copy; {new Date().getFullYear()} Hazem Hassine</p>
         <p>VSCode Portfolio</p>
         {selectedItem && (
           <p className="mt-1 text-[var(--vscode-tab-active-top-border-color)] truncate" title={selectedItem}>

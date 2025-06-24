@@ -3,7 +3,6 @@ import TabItem from './TabItem';
 
 const TabBar = ({ tabs, activeTab, onTabClick, onTabClose }) => {
   return (
-    // Removed border-b from TabBar; separation will be handled by tabs and content area relationship
     <div className="flex bg-[var(--vscode-tab-bar-background)] overflow-x-auto h-[40px] shrink-0">
       {tabs.map((tab) => (
         <TabItem

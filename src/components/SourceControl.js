@@ -3,14 +3,12 @@
 import React, { useState, useEffect } from "react";
 import {
   VscChevronRight,
-  VscSourceControl,
   VscRefresh,
   VscSync,
   VscGitCommit,
   VscGitPullRequest,
   VscCloudUpload,
 } from "react-icons/vsc";
-import { BsDot } from "react-icons/bs";
 
 const placeholderRepos = [
   { name: "vscode-portfolio", branch: "main", dirty: true },
@@ -156,7 +154,6 @@ export default function SourceControl() {
               <span className="flex-shrink-0 w-3">•</span>
               <span>Stars: 42</span>
             </div>
-            {/* or swap in your SVG/chart here */}
           </div>
         )}
       </nav>

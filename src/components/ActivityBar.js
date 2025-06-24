@@ -122,13 +122,14 @@ const ActivityBar = ({ setActivePanel }) => {
   }, []);
 
   const handleIconClick = (id) => {
-    setActiveId(id);
-    setActivePanel(id);
     if (id === "settings") {
       setSettingsOpen((open) => !open);
+      return;
     } else {
       setSettingsOpen(false);
     }
+    setActiveId(id);
+    setActivePanel(id);
   };
 
   const renderItem = ({ id, Icon, badge }) => {
