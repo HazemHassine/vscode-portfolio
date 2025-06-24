@@ -126,7 +126,7 @@ const ActivityBar = ({ setActivePanel }) => {
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
 
-  const handleIconClick = (id) => {
+  const handleIconClick = (id) => { 
     if (id === "settings") {
       setSettingsOpen((open) => !open);
     } else {
