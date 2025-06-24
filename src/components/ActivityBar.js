@@ -24,7 +24,7 @@ const settingsMenuItems = [
   { label: "Download Update (1)" },
 ];
 
-const SettingsMenuItem = ({ item }) => (
+const SettingsMenuItem = React.memo(({ item }) => (
   <>
     <button
       className={`
@@ -68,7 +68,9 @@ const SettingsMenuItem = ({ item }) => (
       <div className="border-t border-[var(--vscode-border-color)] mx-2" />
     )}
   </>
-);
+));
+
+SettingsMenuItem.displayName = 'SettingsMenuItem'; // Add display name for React Dev Tools
 
 const SettingsMenu = React.forwardRef((_, ref) => (
   <div
@@ -88,6 +90,9 @@ const SettingsMenu = React.forwardRef((_, ref) => (
   </div>
 ));
 
+SettingsMenu.displayName = 'SettingsMenu'; // Add display name for React Dev Tools
+
+
 const ActivityBar = ({ setActivePanel }) => {
   // top icons
   const topItems = [
@@ -103,7 +108,7 @@ const ActivityBar = ({ setActivePanel }) => {
     { id: "settings", Icon: VscSettingsGear, badge: 1 },
   ];
 
-  const [activeId, setActiveId] = useState(null);
+  const [activeId, setActiveId] = useState("explorer"); // Set a default active icon
   const [settingsOpen, setSettingsOpen] = useState(false);
   const settingsWrapperRef = useRef();
 
@@ -124,12 +129,11 @@ const ActivityBar = ({ setActivePanel }) => {
   const handleIconClick = (id) => {
     if (id === "settings") {
       setSettingsOpen((open) => !open);
-      return;
     } else {
-      setSettingsOpen(false);
+      setSettingsOpen(false); // Close settings if another icon is clicked
+      setActiveId(id); // Set the clicked icon as active
+      setActivePanel(id); // Inform parent about active panel
     }
-    setActiveId(id);
-    setActivePanel(id);
   };
 
   const renderItem = ({ id, Icon, badge }) => {
@@ -147,13 +151,17 @@ const ActivityBar = ({ setActivePanel }) => {
             : "hover:bg-[#2a2d2e] border-l-4 border-transparent text-gray-400"
           }
         `}
+        role="button" // Improve accessibility
+        aria-pressed={isActive} // Improve accessibility
       >
         <Icon size={24} />
-        {badge && (
+        {badge !== undefined && badge !== null && ( // Ensure badge is not null or undefined
           <span className="
-            absolute bottom-1 right-1
-            bg-[#0078d4] text-xs rounded-full px-1 leading-none
+            absolute top-1 right-1
+            bg-[#0078d4] text-[10px] rounded-full
+            w-4 h-4 flex items-center justify-center
             text-white font-semibold select-none
+            z-10
           ">
             {badge}
           </span>
