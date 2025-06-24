@@ -17,8 +17,7 @@ const ContentArea = ({ activeTabData }) => {
         <CSSTransition
           key={activeTabData?.id || 'empty'}
           nodeRef={nodeRef}
-          timeout={200}
-          classNames="content-fade"
+          timeout={50}
           addEndListener={done => {
             nodeRef.current?.addEventListener("transitionend", done, false);
           }}
