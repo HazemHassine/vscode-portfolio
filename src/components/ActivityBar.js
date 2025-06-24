@@ -51,10 +51,18 @@ const SettingsMenuItem = ({ item }) => (
             {item.shortcut}
           </kbd>
         )}
-        {item.hasSubmenu && (
-          <span className="text-[var(--vscode-text-secondary)] select-none">{">"}</span>
-        )}
       </span>
+      {item.hasSubmenu && (
+          <svg
+            className="w-3 h-3 ml-auto text-[var(--vscode-text-secondary)]"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
+          </svg>
+        )}
     </button>
     {item.dividerAfter && (
       <div className="border-t border-[var(--vscode-border-color)] mx-2" />
@@ -66,8 +74,8 @@ const SettingsMenu = React.forwardRef((_, ref) => (
   <div
     ref={ref}
     className="
-      absolute right-0 bottom-full mb-2
-      w-56
+      absolute bottom-full mb-2 ml-2
+      w-64
       bg-[var(--vscode-menubar-background)]
       border border-[var(--vscode-border-color)]
       rounded-sm shadow-lg z-50
@@ -80,7 +88,8 @@ const SettingsMenu = React.forwardRef((_, ref) => (
   </div>
 ));
 
-const ActivityBar = () => {
+const ActivityBar = ({ setActivePanel }) => {
+  // top icons
   const topItems = [
     { id: "search", Icon: VscSearch },
     { id: "explorer", Icon: VscFiles },
@@ -88,6 +97,7 @@ const ActivityBar = () => {
     { id: "debug", Icon: VscDebugAlt },
     { id: "extensions", Icon: VscExtensions, badge: 1 },
   ];
+  // bottom icons, including settings
   const bottomItems = [
     { id: "account", Icon: VscAccount },
     { id: "settings", Icon: VscSettingsGear, badge: 1 },
@@ -97,6 +107,7 @@ const ActivityBar = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const settingsWrapperRef = useRef();
 
+  // close settings menu on outside click
   useEffect(() => {
     function onClickOutside(e) {
       if (
@@ -112,6 +123,7 @@ const ActivityBar = () => {
 
   const handleIconClick = (id) => {
     setActiveId(id);
+    setActivePanel(id);
     if (id === "settings") {
       setSettingsOpen((open) => !open);
     } else {
@@ -129,23 +141,19 @@ const ActivityBar = () => {
           relative flex items-center justify-center
           w-full h-12 cursor-pointer
           transition-colors duration-150
-          ${
-            isActive
-              ? "bg-[#333333] border-l-4 border-[#007ACC] text-white"
-              : "hover:bg-[#2a2d2e] border-l-4 border-transparent text-gray-400"
+          ${isActive
+            ? "bg-[#333333] border-l-4 border-[#007ACC] text-white"
+            : "hover:bg-[#2a2d2e] border-l-4 border-transparent text-gray-400"
           }
         `}
       >
         <Icon size={24} />
         {badge && (
-          <span
-            className={`
-              absolute ${id === "settings" ? "bottom-1" : "top-1"} right-1
-              w-4 h-4 flex items-center justify-center
-              bg-[#0078d4] text-[10px] rounded-full
-              text-white font-semibold select-none
-            `}
-          >
+          <span className="
+            absolute bottom-1 right-1
+            bg-[#0078d4] text-xs rounded-full px-1 leading-none
+            text-white font-semibold select-none
+          ">
             {badge}
           </span>
         )}
@@ -160,16 +168,18 @@ const ActivityBar = () => {
           {topItems.map(renderItem)}
         </div>
         <div className="flex flex-col space-y-1">
-          {bottomItems.map((item) =>
-            item.id === "settings" ? (
-              <div key="settings" ref={settingsWrapperRef} className="relative">
-                {renderItem(item)}
-                {settingsOpen && <SettingsMenu />}
-              </div>
-            ) : (
-              renderItem(item)
-            )
-          )}
+          {bottomItems.map((item) => {
+            if (item.id === "settings") {
+              return (
+                <div key="settings" ref={settingsWrapperRef} className="relative">
+                  {renderItem(item)}
+                  {settingsOpen && <SettingsMenu />}
+                </div>
+              );
+            } else {
+              return renderItem(item);
+            }
+          })}
         </div>
       </aside>
     </>

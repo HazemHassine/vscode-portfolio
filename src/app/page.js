@@ -1,19 +1,19 @@
 "use client"; // Required for useState and event handlers
 
 import React, { useState } from 'react';
-import FileExplorer from '../components/FileExplorer';
-import SourceControl from '../components/SourceControl';
-import MenuBar from '../components/MenuBar';
-import TabBar from '../components/TabBar';
-import StatusBar from '../components/StatusBar';
-import ContentArea from '../components/ContentArea';
-import ActivityBar from '../components/ActivityBar';
+import FileExplorer from '@/components/FileExplorer';
+import SearchPanel from '@/components/SearchPanel';
+import SourceControl from '@/components/SourceControl';
+import MenuBar from '@/components/MenuBar';
+import TabBar from '@/components/TabBar';
+import StatusBar from '@/components/StatusBar';
+import ContentArea from '@/components/ContentArea';
+import ActivityBar from '@/components/ActivityBar';
 import { VscMarkdown, VscJson } from 'react-icons/vsc';
 import { DiReact as DiReactIcon } from 'react-icons/di';
 import TerminalView from '@/components/TerminalView';
 
 // Initial tabs data
-// Updated initialTabsData to use Vsc icons or more appropriate ones
 const initialTabsData = [
   {
     id: 'about.md',
@@ -42,7 +42,7 @@ This portfolio is a small showcase of my journey into web development, styled af
   {
     id: 'projects.jsx',
     title: 'Projects.jsx',
-    icon: <DiReactIcon className="text-sky-400" />, // DiReactIcon is more specific for JSX/React
+    icon: <DiReactIcon className="text-sky-400" />,
     content: `
 // Projects.jsx
 // This file will showcase your projects using JSX.
@@ -91,7 +91,7 @@ export default MyProjects; // Keep as string for pre tag
   {
     id: 'readme.md',
     title: 'README.md',
-    icon: <VscMarkdown className="text-[var(--vscode-text-secondary)]" />, // Using Vsc icon
+    icon: <VscMarkdown className="text-[var(--vscode-text-secondary)]" />,
     content: `
 # Portfolio Project: VSCode Edition
 
@@ -130,9 +130,9 @@ It's built using modern web technologies to showcase my skills and projects in a
     `,
   },
   {
-    id: 'config.json', // Changed from skills.js to a JSON example
+    id: 'config.json',
     title: 'config.json',
-    icon: <VscJson className="text-yellow-400" />, // VscJson for JSON files
+    icon: <VscJson className="text-yellow-400" />,
     content: JSON.stringify(
       {
         "theme": "vscode-dark",
@@ -152,16 +152,42 @@ It's built using modern web technologies to showcase my skills and projects in a
         }
       },
       null,
-      2 // Indentation for pretty printing
+      2
     ),
   },
 ];
+
 export default function HomePage() {
   const [tabs, setTabs] = useState(initialTabsData);
   const [activeTabId, setActiveTabId] = useState(initialTabsData[0].id);
+  const [activePanel, setActivePanel] = useState("explorer");
 
-  const handleTabClick = (tabId) => setActiveTabId(tabId);
-  const handleTabClose = (tabIdToClose) => { /* unchanged logic */ };
+  const handleTabClick = (tabId) => {
+    setActiveTabId(tabId);
+  };
+
+  const handleTabClose = (tabIdToClose) => {
+    setTabs(prevTabs => {
+      const closingIndex = prevTabs.findIndex(tab => tab.id === tabIdToClose);
+      const newTabs = prevTabs.filter(tab => tab.id !== tabIdToClose);
+
+      // If the closed tab was active, pick a new active tab
+      if (tabIdToClose === activeTabId) {
+        if (newTabs.length > 0) {
+          // Prefer the next tab to the right, otherwise the last tab
+          const nextIndex = closingIndex < newTabs.length
+            ? closingIndex
+            : newTabs.length - 1;
+          setActiveTabId(newTabs[nextIndex].id);
+        } else {
+          setActiveTabId(null);
+        }
+      }
+
+      return newTabs;
+    });
+  };
+
   const activeTabData = tabs.find(tab => tab.id === activeTabId);
 
   return (
@@ -171,12 +197,14 @@ export default function HomePage() {
 
       {/* Main area: ActivityBar + Editor + Terminal */}
       <div className="flex flex-grow overflow-hidden">
-        <ActivityBar />
+        <ActivityBar setActivePanel={setActivePanel} />
 
         <div className="flex flex-col flex-grow overflow-hidden">
           {/* Editor pane */}
           <div className="flex flex-grow bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
-            <SourceControl />
+            {activePanel === "explorer" && <FileExplorer />}
+            {activePanel === "scm"      && <SourceControl />}
+            {activePanel === "search"   && <SearchPanel />}
             <div className="w-px bg-[var(--vscode-border-color)] shrink-0" />
             <div className="flex flex-col flex-grow min-w-0">
               <TabBar
@@ -189,8 +217,6 @@ export default function HomePage() {
               <TerminalView />
             </div>
           </div>
-
-          {/* Terminal pane */}
         </div>
       </div>
 
