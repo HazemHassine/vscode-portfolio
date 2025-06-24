@@ -179,7 +179,7 @@ const ExplorerItem = ({
         {modified && (
           <div
             size={18}
-            className="flex-shrink-0 text-orange-300 font-semibold pr-1"
+            className="flex-shrink-0 text-orange-300 font-semibold pr-2"
             style={{ marginLeft: 4, marginRight: -6 }}
           >M</div>
         )}

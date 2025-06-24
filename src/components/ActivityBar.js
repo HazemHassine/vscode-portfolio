@@ -70,7 +70,7 @@ const SettingsMenuItem = React.memo(({ item }) => (
   </>
 ));
 
-SettingsMenuItem.displayName = 'SettingsMenuItem'; // Add display name for React Dev Tools
+SettingsMenuItem.displayName = 'SettingsMenuItem';
 
 const SettingsMenu = React.forwardRef((_, ref) => (
   <div
@@ -90,7 +90,7 @@ const SettingsMenu = React.forwardRef((_, ref) => (
   </div>
 ));
 
-SettingsMenu.displayName = 'SettingsMenu'; // Add display name for React Dev Tools
+SettingsMenu.displayName = 'SettingsMenu';
 
 
 const ActivityBar = ({ setActivePanel }) => {
