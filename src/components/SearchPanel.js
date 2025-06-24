@@ -25,8 +25,8 @@ export default function SearchPanel() {
 
   return (
     <div
-      className="w-[320px] flex flex-col shrink-0 select-none font-sans text-sm
-      bg-[#252526] text-[#cccccc] border-r border-[#2d2d30]"
+      className="flex flex-col h-full shrink-0 select-none font-sans text-sm
+     bg-[#252526] text-[#cccccc]"
     >
       {/* Header */}
       <div

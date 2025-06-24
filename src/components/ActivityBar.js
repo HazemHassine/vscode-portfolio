@@ -80,7 +80,7 @@ const SettingsMenu = React.forwardRef((_, ref) => (
       w-64
       bg-[var(--vscode-menubar-background)]
       border border-[var(--vscode-border-color)]
-      rounded-sm shadow-lg z-50
+      rounded-sm shadow-lg z-[1000000]
     "
     onClick={(e) => e.stopPropagation()}
   >
@@ -99,8 +99,8 @@ const ActivityBar = ({ setActivePanel }) => {
     { id: "search", Icon: VscSearch },
     { id: "explorer", Icon: VscFiles },
     { id: "scm", Icon: VscSourceControl, badge: 2 },
-    { id: "debug", Icon: VscDebugAlt },
-    { id: "extensions", Icon: VscExtensions, badge: 1 },
+    // { id: "debug", Icon: VscDebugAlt },
+    // { id: "extensions", Icon: VscExtensions, badge: 1 },
   ];
   // bottom icons, including settings
   const bottomItems = [

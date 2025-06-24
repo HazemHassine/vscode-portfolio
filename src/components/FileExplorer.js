@@ -218,7 +218,7 @@ const FileExplorer = () => {
   };
 
   return (
-    <aside className="w-[280px] flex flex-col shrink-0 select-none font-sans bg-[var(--vscode-sidebar-background)] text-[var(--vscode-text-primary)] border-r border-[var(--vscode-border-color)]">
+    <aside className="flex flex-col h-full shrink-0 select-none font-sans bg-[var(--vscode-sidebar-background)] text-[var(--vscode-text-primary)]">
       {/* Top Bar */}
       <div className="flex items-center justify-between h-[35px] px-2 border-b border-[var(--vscode-border-color)] bg-[var(--vscode-tab-bar-background)]">
         <div className="text-[11px] font-semibold uppercase text-[var(--vscode-text-secondary)] whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px]">

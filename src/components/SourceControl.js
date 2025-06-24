@@ -114,9 +114,8 @@ export default function SourceControl() {
   const handleRefreshAll = () => fetchRepos();
 
   return (
-    <aside className="w-[280px] flex flex-col shrink-0 select-none font-sans
-      bg-[var(--vscode-sidebar-background)] text-[var(--vscode-text-primary)]
-      border-r border-[var(--vscode-border-color)]"
+    <aside className="flex flex-col h-full shrink-0 select-none font-sans
+  bg-[var(--vscode-sidebar-background)] text-[var(--vscode-text-primary)]"
     >
       {/* Top Bar */}
       <div className="flex items-center justify-between h-[35px] px-2

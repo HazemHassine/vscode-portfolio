@@ -14,6 +14,7 @@ import { VscMarkdown, VscJson } from 'react-icons/vsc';
 import { DiReact as DiReactIcon } from 'react-icons/di';
 import TerminalView from '@/components/TerminalView';
 import MarkdownEditorViewer from '@/components/tabs/MarkdownEditorViewer';
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 
 // Initial tabs data
@@ -99,28 +100,45 @@ export default function HomePage() {
     <div className="flex flex-col h-screen">
       <MenuBar />
 
-      <div className="flex flex-grow overflow-hidden">
-        <ActivityBar setActivePanel={setActivePanel} />
-
-        <div className="flex flex-col flex-grow overflow-hidden">
-          <div className="flex flex-grow bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
+      <PanelGroup direction="horizontal" className="flex">
+        <Panel defaultSize={3} minSize={3} maxSize={8} className="flex">
+          <ActivityBar setActivePanel={setActivePanel} />
+        </Panel>
+        
+        <PanelResizeHandle className="w-1 bg-transparent hover:bg-[var(--vscode-tab-active-top-border-color)] transition-colors" />
+        
+        <Panel defaultSize={25} minSize={15} maxSize={40}>
+          <div className="h-full bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
             {activePanel === "explorer" && <FileExplorer />}
             {activePanel === "scm" && <SourceControl />}
             {activePanel === "search" && <SearchPanel />}
-            <div className="w-px bg-[var(--vscode-border-color)] shrink-0" />
-            <div className="flex flex-col flex-grow min-w-0">
-              <TabBar
-                tabs={tabs}
-                activeTab={activeTabId}
-                onTabClick={handleTabClick}
-                onTabClose={handleTabClose}
-              />
-              <ContentArea activeTabData={activeTabData} />
-              <TerminalView />
-            </div>
           </div>
-        </div>
-      </div>
+        </Panel>
+        
+        <PanelResizeHandle className="w-1 bg-transparent hover:bg-[var(--vscode-tab-active-top-border-color)] transition-colors" />
+        
+        <Panel defaultSize={70} minSize={30}>
+          <PanelGroup direction="vertical" className="h-full">
+            <Panel defaultSize={70} minSize={30}>
+              <div className="flex flex-col h-full min-w-0">
+                <TabBar
+                  tabs={tabs}
+                  activeTab={activeTabId}
+                  onTabClick={handleTabClick}
+                  onTabClose={handleTabClose}
+                />
+                <ContentArea activeTabData={activeTabData} />
+              </div>
+            </Panel>
+            
+            <PanelResizeHandle className="h-1 bg-transparent hover:bg-[var(--vscode-tab-active-top-border-color)] transition-colors" />
+            
+            <Panel defaultSize={30} minSize={15} maxSize={50}>
+              <TerminalView />
+            </Panel>
+          </PanelGroup>
+        </Panel>
+      </PanelGroup>
       <StatusBar />
     </div>
   );
