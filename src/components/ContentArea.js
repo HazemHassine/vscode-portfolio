@@ -1,40 +1,51 @@
+'use client'
 import React, { useRef } from 'react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 const ContentArea = ({ activeTabData }) => {
-  const containerClasses = "flex-grow bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] font-mono overflow-auto p-6";
-
-  // Create a ref for the transitioning node
   const nodeRef = useRef(null);
+  const content = activeTabData?.content;
+  const isString = typeof content === 'string';
 
   return (
-    <main className={containerClasses}>
+    <main className="
+      flex flex-col flex-1 min-h-0 h-full
+      bg-[var(--vscode-editor-background)]
+      text-[var(--vscode-text-primary)]
+    ">
       <SwitchTransition mode="out-in">
         <CSSTransition
-          key={activeTabData ? activeTabData.id : 'empty'}
+          key={activeTabData?.id || 'empty'}
           nodeRef={nodeRef}
-          addEndListener={(done) => {
-            if (nodeRef.current) {
-              nodeRef.current.addEventListener("transitionend", done, false);
-            }
+          timeout={50}
+          addEndListener={done => {
+            nodeRef.current?.addEventListener("transitionend", done, false);
           }}
-          timeout={0}
         >
-          <div ref={nodeRef}>
+          <div
+            ref={nodeRef}
+            className="flex flex-1 min-h-0 overflow-hidden"
+          >
             {!activeTabData ? (
-              <div className="flex items-center justify-center h-full text-[var(--vscode-text-secondary)]">
+              <div className="
+                flex items-center justify-center flex-1
+                text-[var(--vscode-text-secondary)]
+              ">
                 Select a file to view its content or open a new one.
               </div>
+            ) : isString ? (
+              <pre className="
+                flex-1 overflow-auto
+                whitespace-pre-wrap break-words
+                font-mono text-sm leading-relaxed p-6
+              ">
+                {content}
+              </pre>
             ) : (
-              <>
-                <pre className="whitespace-pre-wrap break-words text-sm leading-relaxed">
-                  {typeof activeTabData.content === 'string'
-                    ? activeTabData.content
-                    : React.isValidElement(activeTabData.content)
-                      ? activeTabData.content
-                      : 'Invalid content format.'}
-                </pre>
-              </>
+              // **Directly** render your MarkdownEditorViewer (or any React component)
+              <div className="flex flex-1 min-h-0 overflow-hidden">
+                {content}
+              </div>
             )}
           </div>
         </CSSTransition>
