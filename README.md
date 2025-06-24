@@ -1,8 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# VSCode Style Portfolio
+
+A personal portfolio website styled to look and feel like Visual Studio Code.
+
+---
+
+## Overview
+
+This project is a developer portfolio that mimics the familiar VSCode interface in the browser. It features a sidebar file explorer, tabbed code editor panes, and a mock terminal, all driven by Next.js and styled with Tailwind CSS.
+
+---
+
+## Technologies & Libraries
+
+- **Next.js** (`next@15.3.4`) – React framework for routing, server-side rendering, and static exports  
+- **React** (`react@^19.0.0` & `react-dom@^19.0.0`) – Component library to build interactive UI  
+- **@headlessui/react** – Unstyled, accessible UI components  
+- **@monaco-editor/react** – Embeddable VSCode editor component  
+- **@vscode/codicons** – Official VSCode icon set  
+- **github-markdown-css** – GitHub-style Markdown rendering  
+- **http-proxy-middleware** – API proxy support during development  
+- **katex**, **rehype-katex**, **remark-math** – Math rendering in Markdown  
+- **react-markdown**, **remark-gfm** – Markdown parsing and GitHub Flavored Markdown support  
+- **react-icons** – Collection of popular icon packs  
+- **react-resizable-panels** – Resizable split‐pane layouts  
+- **react-transition-group** – Animation utilities for React  
+- **Tailwind CSS** (`tailwindcss@^4.1.10`) with:
+  - **@tailwindcss/typography** – Prose styling for Markdown
+  - **@tailwindcss/postcss** – PostCSS plugin integration  
+- **ESLint** & **eslint-config-next** – Linting and code quality  
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js v14 or higher  
+- npm, yarn, pnpm, or bun  
+
+### Installation
+
+1. Clone the repo  
+   ```bash
+   git clone https://github.com/HazemHassine/vscode-portfolio.git
+   cd vscode-portfolio
+````
+
+2. Install dependencies
+
+   ```bash
+   npm install
+   # or
+   yarn
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+---
+
+## Running Locally
+
+Start the development server:
 
 ```bash
 npm run dev
@@ -14,23 +74,27 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser at [http://localhost:3000](http://localhost:3000). The site will hot-reload as you edit files.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+This site is ready for static export or Vercel deployment:
 
-To learn more about Next.js, take a look at the following resources:
+* **Vercel**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  1. Connect the GitHub repo in your Vercel dashboard.
+  2. Vercel auto-detects Next.js and deploys on push.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* **Static Export**
 
-## Deploy on Vercel
+  ```bash
+  npm run build
+  npm run export
+  ```
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

@@ -107,7 +107,7 @@ const ExplorerItem = ({
 
   useEffect(() => {
     if (isFolder) setIsOpen(collapseMode === "expand");
-  }, [collapseSignal, collapseMode]);
+  }, [collapseSignal, collapseMode, isFolder]);
 
   const handleClick = (e) => {
     e.stopPropagation();
