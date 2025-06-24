@@ -21,12 +21,12 @@ const convertExplorerDataToFileSystem = (explorerData) => {
         if (child.type === 'folder') {
           folderContent[child.name] = processNode(child, [...currentPath, child.name]);
         } else if (child.type === 'file') {
-          folderContent[child.name] = `Content of ${child.name}`; // Placeholder content for files
+          folderContent[child.name] = `Content of ${child.name}`;
         }
       });
       return folderContent;
     } else if (node.type === 'file') {
-      return `Content of ${node.name}`; // Placeholder content for files
+      return `Content of ${node.name}`;
     }
   };
 
@@ -34,7 +34,7 @@ const convertExplorerDataToFileSystem = (explorerData) => {
     if (node.type === 'folder') {
       fileSystem[node.name] = processNode(node, [node.name]);
     } else if (node.type === 'file') {
-      fileSystem[node.name] = `Content of ${node.name}`; // Placeholder content for files
+      fileSystem[node.name] = `Content of ${node.name}`;
     }
   });
 
@@ -192,7 +192,7 @@ const TerminalView = () => {
   }, [history]);
 
   // Dynamically generate the prompt based on the current working directory.
-  // We're showing a '~' for paths within '/home/hazem' for a more realistic feel.
+  // Shows a '~' for paths within '/home/hazem' for a more realistic feel.
   const prompt = {
     user: 'hazem@HazemPC',
     cwd: cwd.startsWith('/home/hazem') ? `~${cwd.substring('/home/hazem'.length)}` : cwd
