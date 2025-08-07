@@ -6,6 +6,7 @@ const ContentArea = ({ activeTabData }) => {
   const nodeRef = useRef(null);
   const content = activeTabData?.content;
   const isString = typeof content === 'string';
+  const isMarkdown = activeTabData?.title.endsWith('.md');
 
   return (
     <main className="
@@ -24,7 +25,7 @@ const ContentArea = ({ activeTabData }) => {
         >
           <div
             ref={nodeRef}
-            className="flex flex-1 min-h-0 overflow-hidden"
+            className="flex flex-1 min-h-0 overflow-auto"
           >
             {!activeTabData ? (
               <div className="
@@ -42,9 +43,8 @@ const ContentArea = ({ activeTabData }) => {
                 {content}
               </pre>
             ) : (
-              // **Directly** render your MarkdownEditorViewer (or any React component)
-              <div className="flex flex-1 min-h-0 overflow-hidden">
-                {content}
+              <div className="flex flex-1 min-h-0 overflow-auto">
+                {isMarkdown ? content : <div className="w-full flex flex-col flex-1 min-h-0">{content}</div>}
               </div>
             )}
           </div>

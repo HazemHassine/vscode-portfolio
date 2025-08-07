@@ -298,7 +298,7 @@ const TerminalView = () => {
   const activeTab = 'TERMINAL';
 
   return (
-    <div className="flex flex-col h-80 border-t border-[var(--vscode-border-color)]">
+    <div className="flex flex-col h-full border-t border-[var(--vscode-border-color)]">
       {/* Panel header */}
       <div className="flex items-center justify-between bg-[var(--vscode-panel-background)] text-[var(--vscode-panel-tab-inactiveForeground)] px-4 h-8 border-b border-[var(--vscode-border-color)]">
         <div className="flex space-x-6 text-xs font-medium">

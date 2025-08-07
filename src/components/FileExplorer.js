@@ -12,6 +12,8 @@ import {
   VscNewFile,
   VscRefresh,
   VscCollapseAll,
+  VscJson,
+  VscBook
 } from "react-icons/vsc";
 
 // .git folder contents
@@ -40,27 +42,30 @@ const gitFolderContents = [
 const initialExplorerData = [
   {
     type: "folder",
-    name: ".git",
-    icon: <VscFolder />,
-    children: gitFolderContents,
-  },
-  {
-    type: "folder",
     name: "Portfolio",
     icon: <VscFolder />,
     children: [
-      { type: "file", name: "Home.jsx", icon: <VscFileCode /> },
       { type: "file", name: "About.md", icon: <VscMarkdown />, gitStatus: "modified" },
       { type: "file", name: "Projects.jsx", icon: <VscFileCode /> },
+      { type: "file", name: "Work.ipynb", icon: <VscBook className="text-orange-400" /> },
       { type: "file", name: "Skills.jsx", icon: <VscFileCode />, gitStatus: "modified" },
-      { type: "file", name: "Blog.md", icon: <VscMarkdown /> },
       { type: "file", name: "Contact.jsx", icon: <VscMarkdown /> },
     ],
   },
-  {type: "file",
-  name: ".gitignore",
-  icon: <VscFileCode />,
-
+  {
+    type: "file",
+    name: "README.md",
+    icon: <VscMarkdown />,
+  },
+  {
+    type: "file",
+    name: "config.json",
+    icon: <VscJson className="text-yellow-400" />,
+  },
+  {
+    type: "file",
+    name: ".gitignore",
+    icon: <VscFileCode />,
   }
 ];
 
@@ -90,6 +95,7 @@ const isHiddenItem = (name) => name.startsWith(".");
 const ExplorerItem = ({
   item,
   level = 0,
+  onFileSelect,
   selected,
   onSelect,
   parentPath = "",
@@ -111,7 +117,11 @@ const ExplorerItem = ({
 
   const handleClick = (e) => {
     e.stopPropagation();
-    if (isFolder) setIsOpen(!isOpen);
+    if (isFolder) {
+      setIsOpen(!isOpen);
+    } else {
+      onFileSelect(item);
+    }
     onSelect(fullPath);
   };
 
@@ -194,6 +204,7 @@ const ExplorerItem = ({
               level={level + 1}
               selected={selected}
               onSelect={onSelect}
+              onFileSelect={onFileSelect}
               parentPath={fullPath}
               parentHidden={hidden}
               defaultOpen={child.name !== ".git"}
@@ -207,7 +218,7 @@ const ExplorerItem = ({
   );
 };
 
-const FileExplorer = () => {
+const FileExplorer = ({ onFileSelect }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [collapseSignal, setCollapseSignal] = useState(0);
   const [allCollapsed, setAllCollapsed] = useState(false);
@@ -255,6 +266,7 @@ const FileExplorer = () => {
             item={item}
             selected={selectedItem}
             onSelect={setSelectedItem}
+            onFileSelect={onFileSelect}
             parentPath="~/dev"
             defaultOpen={!allCollapsed && item.name !== ".git"}
             collapseSignal={collapseSignal}

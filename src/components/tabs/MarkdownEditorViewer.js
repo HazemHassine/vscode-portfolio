@@ -1,24 +1,23 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
-// Tailwind Typography plugin classes for markdown styling
-// Ensure you have installed @tailwindcss/typography and enabled it in your tailwind.config.js
 
-// Initial content for each markdown tab
-const MarkdownData = {
-    about: '# About\n\nWelcome to the About tab of your editor!\n\n- List item 1\n- List item 2',
-    readme: '# Readme\n\nThis is the README for your project. Use **Markdown** to document your work.\n\n```js\nconsole.log("Hello, world!");\n```',
-};
+export default function MarkdownEditorViewer({ filePath }) {
+  const [value, setValue] = useState('');
 
-
-export default function MarkdownEditorViewer({ id }) {
-  const [value, setValue] = useState(MarkdownData[id] || '');
+  useEffect(() => {
+    if (filePath) {
+      fetch(filePath)
+        .then((res) => res.text())
+        .then((text) => setValue(text));
+    }
+  }, [filePath]);
 
   return (
     <div className="flex flex-1 min-h-0 h-full overflow-hidden">
@@ -30,7 +29,7 @@ export default function MarkdownEditorViewer({ id }) {
           theme="vs-dark"
           language="markdown"
           value={value}
-          onChange={v => setValue(v || '')}
+          onChange={(v) => setValue(v || '')}
           options={{
             wordWrap: 'on',
             minimap: { enabled: false },

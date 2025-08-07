@@ -10,39 +10,47 @@ import TabBar from '@/components/TabBar';
 import StatusBar from '@/components/StatusBar';
 import ContentArea from '@/components/ContentArea';
 import ActivityBar from '@/components/ActivityBar';
-import { VscMarkdown, VscJson } from 'react-icons/vsc';
+import { VscMarkdown, VscJson, VscBook } from 'react-icons/vsc';
 import { DiReact as DiReactIcon } from 'react-icons/di';
-import TerminalView from '@/components/TerminalView';
+import Skills from '@/components/tabs/Skills';
+import Contact from '@/components/tabs/Contact';
+import WorkNotebook from '@/components/tabs/WorkNotebook';
 import MarkdownEditorViewer from '@/components/tabs/MarkdownEditorViewer';
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import TerminalView from '@/components/TerminalView';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 
-
-// Initial tabs data
-const initialTabsData = [
-  {
+// Component mapping
+const fileComponentMap = {
+  'About.md': {
     id: 'about.md',
     title: 'About.md',
     icon: <VscMarkdown className="text-[var(--vscode-text-secondary)]" />,
-    content: <MarkdownEditorViewer id={'about'} />,
+    content: <MarkdownEditorViewer filePath='/markdown/About.md' />,
   },
-  {
+  'Projects.jsx': {
     id: 'projects.jsx',
     title: 'Projects.jsx',
     icon: <DiReactIcon className="text-sky-400" />,
     content: <Projects />,
   },
-  {
+  'Work.ipynb': {
+    id: 'work.ipynb',
+    title: 'Work.ipynb',
+    icon: <VscBook className="text-orange-400" />,
+    content: <WorkNotebook />,
+  },
+  'README.md': {
     id: 'readme.md',
     title: 'README.md',
     icon: <VscMarkdown className="text-[var(--vscode-text-secondary)]" />,
     content: <MarkdownEditorViewer id={'readme'} />,
   },
-  {
+  'config.json': {
     id: 'config.json',
     title: 'config.json',
     icon: <VscJson className="text-yellow-400" />,
     content:
-        JSON.stringify({
+        JSON.stringify({ 
           "theme": "vscode-dark",
           "fontSize": 14,
           "fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
@@ -59,14 +67,39 @@ const initialTabsData = [
             "statusBar": { "visible": true }
           }
         }, null, 2)
-  }
-];
+  },
+  'Skills.jsx': {
+    id: 'skills.jsx',
+    title: 'Skills.jsx',
+    icon: <DiReactIcon className="text-sky-400" />,
+    content: <Skills />,
+  },
+  'Contact.jsx': {
+    id: 'contact.jsx',
+    title: 'Contact.jsx',
+    icon: <DiReactIcon className="text-sky-400" />,
+    content: <Contact />,
+  },
+};
 
 export default function HomePage() {
-  const [tabs, setTabs] = useState(initialTabsData);
-  const [activeTabId, setActiveTabId] = useState(initialTabsData[0].id);
+  const [tabs, setTabs] = useState([fileComponentMap['About.md']]);
+  const [activeTabId, setActiveTabId] = useState('about.md');
   const [sidePanelVisible, setSidePanelVisible] = useState(true);
   const [activePanel, setActivePanel] = useState("explorer");
+
+  const handleFileSelect = (file) => {
+    if (!fileComponentMap[file.name]) return;
+
+    const existingTab = tabs.find(tab => tab.id === fileComponentMap[file.name].id);
+    if (existingTab) {
+      setActiveTabId(existingTab.id);
+    } else {
+      const newTab = fileComponentMap[file.name];
+      setTabs([...tabs, newTab]);
+      setActiveTabId(newTab.id);
+    }
+  };
 
   const handleIconClick = (panelId) => {
     if (sidePanelVisible && activePanel === panelId) {
@@ -79,7 +112,6 @@ export default function HomePage() {
 
   const handleTabClick = (tabId) => {
     setActiveTabId(tabId);
-    console.log(`Switched to tab: ${tabId}`);
   };
 
   const handleTabClose = (tabIdToClose) => {
@@ -117,7 +149,7 @@ export default function HomePage() {
             <>
               <Panel defaultSize={20} minSize={15} maxSize={40}>
                 <div className="h-full bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
-                  {activePanel === "explorer" && <FileExplorer />}
+                  {activePanel === "explorer" && <FileExplorer onFileSelect={handleFileSelect} />}
                   {activePanel === "scm" && <SourceControl />}
                   {activePanel === "search" && <SearchPanel />}
                 </div>
