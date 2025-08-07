@@ -65,7 +65,17 @@ const initialTabsData = [
 export default function HomePage() {
   const [tabs, setTabs] = useState(initialTabsData);
   const [activeTabId, setActiveTabId] = useState(initialTabsData[0].id);
+  const [sidePanelVisible, setSidePanelVisible] = useState(true);
   const [activePanel, setActivePanel] = useState("explorer");
+
+  const handleIconClick = (panelId) => {
+    if (sidePanelVisible && activePanel === panelId) {
+      setSidePanelVisible(false);
+    } else {
+      setActivePanel(panelId);
+      setSidePanelVisible(true);
+    }
+  };
 
   const handleTabClick = (tabId) => {
     setActiveTabId(tabId);
@@ -100,45 +110,42 @@ export default function HomePage() {
     <div className="flex flex-col h-screen">
       <MenuBar />
 
-      <PanelGroup direction="horizontal" className="flex">
-        <Panel defaultSize={3} minSize={3} maxSize={8} className="flex">
-          <ActivityBar setActivePanel={setActivePanel} />
-        </Panel>
-        
-        <PanelResizeHandle className="w-1 bg-transparent hover:bg-[var(--vscode-tab-active-top-border-color)] transition-colors" />
-        
-        <Panel defaultSize={25} minSize={15} maxSize={40}>
-          <div className="h-full bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
-            {activePanel === "explorer" && <FileExplorer />}
-            {activePanel === "scm" && <SourceControl />}
-            {activePanel === "search" && <SearchPanel />}
-          </div>
-        </Panel>
-        
-        <PanelResizeHandle className="w-1 bg-transparent hover:bg-[var(--vscode-tab-active-top-border-color)] transition-colors" />
-        
-        <Panel defaultSize={70} minSize={30}>
-          <PanelGroup direction="vertical" className="h-full">
-            <Panel defaultSize={70} minSize={30}>
-              <div className="flex flex-col h-full min-w-0">
-                <TabBar
-                  tabs={tabs}
-                  activeTab={activeTabId}
-                  onTabClick={handleTabClick}
-                  onTabClose={handleTabClose}
-                />
-                <ContentArea activeTabData={activeTabData} />
-              </div>
-            </Panel>
-            
-            <PanelResizeHandle className="h-1 bg-transparent hover:bg-[var(--vscode-tab-active-top-border-color)] transition-colors" />
-            
-            <Panel defaultSize={30} minSize={15} maxSize={50}>
-              <TerminalView />
-            </Panel>
-          </PanelGroup>
-        </Panel>
-      </PanelGroup>
+      <div className="flex flex-1 overflow-hidden">
+        <ActivityBar onIconClick={handleIconClick} activeIcon={activePanel} />
+        <PanelGroup direction="horizontal" className="flex-1">
+          {sidePanelVisible && (
+            <>
+              <Panel defaultSize={20} minSize={15} maxSize={40}>
+                <div className="h-full bg-[var(--vscode-editor-background)] text-[var(--vscode-text-primary)] overflow-hidden font-sans">
+                  {activePanel === "explorer" && <FileExplorer />}
+                  {activePanel === "scm" && <SourceControl />}
+                  {activePanel === "search" && <SearchPanel />}
+                </div>
+              </Panel>
+              <PanelResizeHandle className="w-1 bg-transparent hover:bg-[var(--vscode-tab-active-top-border-color)] transition-colors" />
+            </>
+          )}
+          <Panel minSize={30}>
+            <PanelGroup direction="vertical" className="h-full">
+              <Panel defaultSize={70} minSize={30}>
+                <div className="flex flex-col h-full min-w-0">
+                  <TabBar
+                    tabs={tabs}
+                    activeTab={activeTabId}
+                    onTabClick={handleTabClick}
+                    onTabClose={handleTabClose}
+                  />
+                  <ContentArea activeTabData={activeTabData} />
+                </div>
+              </Panel>
+              <PanelResizeHandle className="h-1 bg-transparent hover:bg-[var(--vscode-tab-active-top-border-color)] transition-colors" />
+              <Panel defaultSize={30} minSize={15} maxSize={50}>
+                <TerminalView />
+              </Panel>
+            </PanelGroup>
+          </Panel>
+        </PanelGroup>
+      </div>
       <StatusBar />
     </div>
   );
