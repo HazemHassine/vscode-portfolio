@@ -76,11 +76,11 @@ const SettingsMenu = React.forwardRef((_, ref) => (
   <div
     ref={ref}
     className="
-      absolute bottom-full mb-2 ml-2
+      absolute bottom-0 left-full ml-1
       w-64
       bg-[var(--vscode-menubar-background)]
       border border-[var(--vscode-border-color)]
-      rounded-sm shadow-lg z-[1000000]
+      rounded-sm shadow-lg z-50
     "
     onClick={(e) => e.stopPropagation()}
   >
@@ -93,7 +93,7 @@ const SettingsMenu = React.forwardRef((_, ref) => (
 SettingsMenu.displayName = 'SettingsMenu';
 
 
-const ActivityBar = ({ setActivePanel }) => {
+const ActivityBar = ({ onIconClick, activeIcon }) => {
   // top icons
   const topItems = [
     { id: "search", Icon: VscSearch },
@@ -108,7 +108,6 @@ const ActivityBar = ({ setActivePanel }) => {
     { id: "settings", Icon: VscSettingsGear, badge: 1 },
   ];
 
-  const [activeId, setActiveId] = useState("explorer"); // Set a default active icon
   const [settingsOpen, setSettingsOpen] = useState(false);
   const settingsWrapperRef = useRef();
 
@@ -131,13 +130,12 @@ const ActivityBar = ({ setActivePanel }) => {
       setSettingsOpen((open) => !open);
     } else {
       setSettingsOpen(false); // Close settings if another icon is clicked
-      setActiveId(id); // Set the clicked icon as active
-      setActivePanel(id); // Inform parent about active panel
+      onIconClick(id); // Inform parent about active panel
     }
   };
 
   const renderItem = ({ id, Icon, badge }) => {
-    const isActive = id === activeId;
+    const isActive = id === activeIcon;
     return (
       <div
         key={id}
