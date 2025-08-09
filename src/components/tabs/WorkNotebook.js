@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { BsThreeDots } from 'react-icons/bs';
 
 const NotebookCell = ({ type, content, executionCount, output, onChangeType }) => {
   return (
@@ -152,26 +153,33 @@ Responsibilities:
       {/* Top Action Bar */}
       <div className="flex items-center justify-between text-[var(--vscode-text-secondary)] border-b border-[var(--vscode-border-color)] pb-3 mb-5">
         <div className="flex space-x-4">
-          <button className="text-[var(--vscode-text-secondary)] hover:text-[var(--vscode-text-primary)]">
-            <FaPlay size={16} />
-            Run
-          </button>
-          <button className="text-[var(--vscode-text-secondary)] hover:text-[var(--vscode-text-primary)]">
-            <FaStop size={16} />
-            Cancel
-          </button>
-          <button className="text-[var(--vscode-text-secondary)] hover:text-[var(--vscode-text-primary)]">
-            <FaSave size={16} />
-            Save
-          </button>
-          <button className="text-[var(--vscode-text-secondary)] hover:text-[var(--vscode-text-primary)]">
+          <button className="flex justify-center items-center cursor-pointer gap-2 text-[var(--vscode-text-secondary)] hover:text-[var(--vscode-text-primary)]">
             <FaPlus size={16} />
-            Add
+            <p>Code</p>
+          </button>
+          <button className="flex justify-center items-center cursor-pointer gap-2 text-[var(--vscode-text-secondary)] hover:text-[var(--vscode-text-primary)]">
+            <FaPlus size={16} />
+            <p>Markdown</p>
+          </button>
+          <p>|</p>
+          <button className="flex justify-center items-center cursor-pointer gap-2 text-[var(--vscode-text-secondary)] hover:text-[var(--vscode-text-primary)]">
+            <FaPlay size={16} />
+            <p>Run All</p>
+          </button>
+          <button className="flex justify-center items-center cursor-pointer gap-2 text-[var(--vscode-text-secondary)] hover:text-[var(--vscode-text-primary)]">
+            <FaStop size={16} />
+            <p>Cancel</p>
+          </button>
+          <p>|</p>
+          <button className="flex justify-center items-center cursor-pointer gap-2 text-[var(--vscode-text-secondary)] hover:text-[var(--vscode-text-primary)]">
+            <BsThreeDots size={16} />
+            <p>Outline</p>
           </button>
         </div>
         <div className="text-[var(--vscode-text-secondary)]">
-          Kernel: <span className="text-[var(--vscode-text-primary)]">pytorch_machine_learning_env</span>
+          Kernel: <span className="hover:bg-gray-600 pr-2 pl-1 cursor-pointer py-1 rounded-sm text-[var(--vscode-text-primary)]">pytorch_machine_learning_env</span>
         </div>
+
       </div>
 
       {/* Notebook Cells */}
