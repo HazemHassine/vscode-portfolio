@@ -2,13 +2,12 @@ import React, { useMemo, useState } from "react";
 
 /**
  * VSCode-inspired Skills Explorer + Tabs
- * - Left: "Explorer" showing skill categories as folders
+ * - Left: Explorer with skill categories
  * - Top: Tab bar for opened skills
- * - Right: Editor panel showing dynamic content per skill
+ * - Right: Editor panel with dynamic content
  * Tailwind required.
  */
 
-// --- Theme helper (VS Code-ish palette) ---
 const theme = {
   bg: "bg-[#1e1e1e]",
   panel: "bg-[#252526]",
@@ -20,11 +19,8 @@ const theme = {
   accent: "text-[#79b8ff]",
   green: "text-[#89d185]",
   yellow: "text-[#dcdcaa]",
-  red: "text-[#f48771]",
-  blue: "text-[#4fc1ff]",
 };
 
-// --- Your source data (edit freely) ---
 const RAW_SKILLS = {
   "Programming & Tools": [
     "Python",
@@ -58,16 +54,9 @@ const RAW_SKILLS = {
     "Django",
   ],
   "Soft Skills": ["Analytical Thinking", "Communication & Teaching", "Agile & Team Collaboration"],
-  Languages: [
-    // Prefilled with levels from your resume (feel free to change display labels)
-    "Arabic (Native)",
-    "English (C1)",
-    "French (C1)",
-    "German (A2+)",
-  ],
+  Languages: ["Arabic (Native)", "English (C1)", "French (C1)", "German (A2+)"],
 };
 
-// --- Iconography / badges / metadata per skill ---
 const iconFor = (name) => {
   const n = name.toLowerCase();
 
@@ -83,18 +72,16 @@ const iconFor = (name) => {
   if (n === "cpp" || n === "c++") return { icon: "💠", hint: "Programming Language" };
   if (n.includes("sql")) return { icon: "🗄️", hint: "Databases & SQL" };
   if (n === "linux") return { icon: "🐧", hint: "OS / DevOps" };
-  if (n === "power bi" || n.includes("power bi")) return { icon: "📊", hint: "BI / Analytics" };
+  if (n.includes("power bi")) return { icon: "📊", hint: "BI / Analytics" };
 
   // Python ecosystem
-  if (["pandas", "numpy", "matplotlib", "opencv", "nltk", "langchain", "scikit-learn", "scikit learn", "scikitlearn"].some(k=>n.includes(k))) {
-    if (n.includes("pandas")) return { icon: "🧮", hint: "DataFrame / Analysis" };
-    if (n.includes("numpy")) return { icon: "📐", hint: "Numerical" };
-    if (n.includes("matplotlib")) return { icon: "📈", hint: "Plotting" };
-    if (n.includes("opencv")) return { icon: "👁️", hint: "Computer Vision" };
-    if (n.includes("nltk")) return { icon: "🔤", hint: "NLP" };
-    if (n.includes("langchain")) return { icon: "🧩", hint: "LLM Tooling" };
-    if (n.includes("scikit")) return { icon: "🧠", hint: "ML Library" };
-  }
+  if (n.includes("pandas")) return { icon: "🧮", hint: "DataFrame / Analysis" };
+  if (n.includes("numpy")) return { icon: "📐", hint: "Numerical" };
+  if (n.includes("matplotlib")) return { icon: "📈", hint: "Plotting" };
+  if (n.includes("opencv")) return { icon: "👁️", hint: "Computer Vision" };
+  if (n.includes("nltk")) return { icon: "🔤", hint: "NLP" };
+  if (n.includes("langchain")) return { icon: "🧩", hint: "LLM Tooling" };
+  if (n.includes("scikit")) return { icon: "🧠", hint: "ML Library" };
 
   // Web / frameworks
   if (n === "reactjs" || n === "react") return { icon: "⚛️", hint: "Frontend" };
@@ -106,7 +93,7 @@ const iconFor = (name) => {
   if (n === "mongodb") return { icon: "🍃", hint: "Database" };
   if (n === "firebase") return { icon: "🔥", hint: "Backend-as-a-Service" };
 
-  // Soft skills (generic but playful)
+  // Soft skills
   if (n.includes("analytical")) return { icon: "🧩", hint: "Thinking" };
   if (n.includes("communication")) return { icon: "💬", hint: "Communication" };
   if (n.includes("agile")) return { icon: "🏃", hint: "Agile" };
@@ -115,25 +102,24 @@ const iconFor = (name) => {
   return { icon: "📄", hint: "Skill" };
 };
 
-const levelBadge = (name) => {
-  // Pull level from the label (e.g., "English (C1)")
-  const match = name.match(/\(([^)]+)\)/);
+const LevelBadge = ({ label }) => {
+  const match = label.match(/\(([^)]+)\)/);
   if (!match) return null;
   const lvl = match[1];
+  const lvll = lvl.toLowerCase();
   const color =
-    lvl.toLowerCase().includes("native") ? "bg-emerald-600" :
-    lvl.toLowerCase().includes("c1") ? "bg-blue-600" :
-    lvl.toLowerCase().includes("a2") || lvl.toLowerCase().includes("b") ? "bg-yellow-600" :
+    lvll.includes("native") ? "bg-emerald-600" :
+    lvll.includes("c1") ? "bg-blue-600" :
+    lvll.includes("a2") || lvll.includes("b") ? "bg-yellow-600" :
     "bg-gray-600";
-  return <span className={`ml-2 px-2 py-0.5 rounded text-xs ${color} text-white`}>{lvl}</span>;
+  return (
+    <span className={`ml-2 px-2 py-0.5 rounded text-xs ${color} text-white`}>{lvl}</span>
+  );
 };
 
-// Little “code doc” for each skill — add/adjust as you like
 const descriptionFor = (name, category) => {
   const n = name.toLowerCase();
-  if (category === "Languages") {
-    return `Spoken language proficiency: ${name}.`;
-  }
+  if (category === "Languages") return `Spoken language proficiency: ${name}.`;
   if (n === "python") return "General-purpose language used for ML, data, scripting, and backends.";
   if (n === "pandas") return "DataFrame manipulation, joins, groupby, time series, and analysis.";
   if (n === "numpy") return "Vectorized numerical computing; arrays, broadcasting, linear algebra.";
@@ -142,7 +128,7 @@ const descriptionFor = (name, category) => {
   if (n === "nltk") return "Classic NLP pre-processing, tokenization, tagging, etc.";
   if (n === "langchain") return "LLM orchestration for RAG, tools, agents.";
   if (n.includes("sql")) return "Relational data querying, schema design, joins, indexes.";
-  if (n === "scikit-learn") return "Modeling for classical ML: preprocessing, pipelines, grid search.";
+  if (n === "scikit-learn") return "Classical ML modeling: preprocessing, pipelines, grid search.";
   if (n === "pytorch") return "Deep learning framework for tensors, autograd, and training loops.";
   if (n === "reactjs" || n === "react") return "Component-based UI, hooks, and virtual DOM rendering.";
   if (n === "nextjs") return "React framework with routing, SSR/SSG, API routes.";
@@ -154,7 +140,6 @@ const descriptionFor = (name, category) => {
   return `Category: ${category}.`;
 };
 
-// --- Components ---
 const ExplorerItem = ({ name, depth = 0, onOpen }) => {
   const { icon, hint } = iconFor(name);
   return (
@@ -163,6 +148,7 @@ const ExplorerItem = ({ name, depth = 0, onOpen }) => {
       className={`w-full text-left px-2 py-1 rounded hover:${theme.surface} ${theme.text}`}
       title={hint}
       style={{ paddingLeft: `${8 + depth * 12}px` }}
+      aria-label={`Open ${name}`}
     >
       <span className="mr-2">{icon}</span>
       <span className="align-middle">{name}</span>
@@ -173,9 +159,12 @@ const ExplorerItem = ({ name, depth = 0, onOpen }) => {
 const Tab = ({ title, active, onClose, onClick }) => (
   <div
     className={`group flex items-center gap-2 px-3 py-1.5 cursor-pointer ${active ? "bg-[#1f2428]" : "bg-[#2a2f34] hover:bg-[#333a41]"} ${theme.border} rounded-t-md`}
+    role="tab"
+    aria-selected={active}
+    aria-label={`Tab ${title}`}
     onClick={onClick}
   >
-    <span className="text-sm">{title}</span>
+    <span className="text-sm truncate max-w-[16ch]">{title}</span>
     <button
       onClick={(e) => {
         e.stopPropagation();
@@ -183,6 +172,7 @@ const Tab = ({ title, active, onClose, onClick }) => (
       }}
       className="opacity-60 group-hover:opacity-100 hover:scale-110 transition"
       aria-label={`Close ${title}`}
+      type="button"
     >
       ✕
     </button>
@@ -191,6 +181,12 @@ const Tab = ({ title, active, onClose, onClick }) => (
 
 const EditorPanel = ({ name, category }) => {
   const { icon, hint } = iconFor(name);
+  const showSample =
+    category !== "Languages" &&
+    /python|react|next|pytorch|scikit|opencv|langchain|flask|django|sql|mongodb|firebase/i.test(name);
+
+  const Quote = () => <span>&quot;</span>;
+
   return (
     <div className={`h-full w-full ${theme.panel} ${theme.border} rounded-b-md p-4`}>
       {/* Header */}
@@ -199,42 +195,42 @@ const EditorPanel = ({ name, category }) => {
           <span className="text-xl">{icon}</span>
           <h3 className={`text-lg ${theme.text} font-semibold`}>
             {name}
-            {category === "Languages" ? levelBadge(name) : null}
+            {category === "Languages" ? <LevelBadge label={name} /> : null}
           </h3>
         </div>
         <span className={`text-xs ${theme.subtext}`}>{hint}</span>
       </div>
 
-      {/* “Code-like” description */}
+      {/* Code-like description */}
       <div className={`font-mono text-sm leading-7 ${theme.text}`}>
-        <div className="opacity-70">// about</div>
+        <div className="opacity-70">{'// about'}</div>
         <div>
           <span className={theme.green}>const</span> <span className={theme.accent}>skill</span>{" "}
           = &#123;
         </div>
         <div className="ml-6">
-          <span className={theme.yellow}>name</span>: "<span>{name}</span>",
+          <span className={theme.yellow}>name</span>: <Quote /><span>{name}</span><Quote />, 
         </div>
         <div className="ml-6">
-          <span className={theme.yellow}>category</span>: "<span>{category}</span>",
+          <span className={theme.yellow}>category</span>: <Quote /><span>{category}</span><Quote />, 
         </div>
         <div className="ml-6">
-          <span className={theme.yellow}>description</span>: "
-          <span>{descriptionFor(name, category)}</span>",
+          <span className={theme.yellow}>description</span>: <Quote />
+          <span>{descriptionFor(name, category)}</span><Quote />, 
         </div>
         <div>&#125;;</div>
 
-        {/* Suggested “cool stuff” based on type */}
+        {/* Extras */}
         {category === "Languages" ? (
           <>
-            <div className="mt-4 opacity-70">// proficiency demo</div>
-            <div>/* Example: 🇩🇪 small-talk · 🇫🇷 professional email · 🇬🇧 tech interview */</div>
+            <div className="mt-4 opacity-70">{'// proficiency demo'}</div>
+            <div>
+              <span>{'/*'}</span> Example: 🇩🇪 small-talk · 🇫🇷 professional email · 🇬🇧 tech interview <span>{'*/'}</span>
+            </div>
           </>
-        ) : /python|react|next|pytorch|scikit|opencv|langchain|flask|django|sql|mongodb|firebase/i.test(
-            name
-          ) ? (
+        ) : showSample ? (
           <>
-            <div className="mt-4 opacity-70">// sample snippet</div>
+            <div className="mt-4 opacity-70">{'// sample snippet'}</div>
             <pre className="mt-1 overflow-auto p-3 rounded bg-[#1b1f23] text-[#c9d1d9]">
 {`// TODO: Replace with a real snippet from your repos
 function demo() {
@@ -249,7 +245,6 @@ function demo() {
 };
 
 const SkillsVSCode = () => {
-  // Explorer collapsed state
   const [collapsed, setCollapsed] = useState({
     "Programming & Tools": false,
     "Machine Learning": false,
@@ -258,11 +253,11 @@ const SkillsVSCode = () => {
     Languages: false,
   });
 
-  // Tabs state
   const [tabs, setTabs] = useState([]); // [{title, category}]
   const [active, setActive] = useState(null);
 
-  const toggle = (folder) => setCollapsed((s) => ({ ...s, [folder]: !s[folder] }));
+  const toggle = (folder) =>
+    setCollapsed((s) => ({ ...s, [folder]: !s[folder] }));
 
   const openTab = (title, category) => {
     setTabs((t) => {
@@ -282,7 +277,6 @@ const SkillsVSCode = () => {
       const idx = t.findIndex((x) => x.title === title);
       if (idx === -1) return t;
       const next = t.filter((x) => x.title !== title);
-      // pick a new active tab
       if (active === title) {
         const neighbor = next[idx - 1] || next[idx] || null;
         setActive(neighbor ? neighbor.title : null);
@@ -291,25 +285,29 @@ const SkillsVSCode = () => {
     });
   };
 
-  const activeTab = useMemo(() => tabs.find((t) => t.title === active) || null, [tabs, active]);
+  const activeTab = useMemo(
+    () => tabs.find((t) => t.title === active) || null,
+    [tabs, active]
+  );
 
   return (
     <div className={`min-h-screen ${theme.bg} text-white`}>
-      
       <div className="grid grid-cols-12">
         {/* Explorer */}
-        <aside className={`col-span-12 md:col-span-3 xl:col-span-2 ${theme.panel} ${theme.border}`}>
+        <aside className={`col-span-12 md:col-span-3 xl:col-span-2 ${theme.panel} ${theme.border}`} aria-label="Skills Explorer">
           <div className="px-1 pb-3">
             {Object.entries(RAW_SKILLS).map(([category, items]) => (
               <div key={category} className="mb-2">
                 <button
                   onClick={() => toggle(category)}
                   className={`w-full text-left px-2 py-1 font-semibold ${theme.text} hover:${theme.surface}`}
+                  aria-expanded={!collapsed[category]}
+                  aria-controls={`section-${category}`}
                 >
                   {collapsed[category] ? "▸" : "▾"} {category}
                 </button>
                 {!collapsed[category] && (
-                  <div className="mt-1">
+                  <div id={`section-${category}`} className="mt-1">
                     {items.map((skill) => (
                       <ExplorerItem
                         key={skill}
@@ -328,7 +326,7 @@ const SkillsVSCode = () => {
         {/* Editor area */}
         <main className="col-span-12 md:col-span-9 xl:col-span-10">
           {/* Tabs */}
-          <div className={`flex flex-wrap gap-1 px-3 pt-3 ${theme.bg}`}>
+          <div className={`flex flex-wrap gap-1 px-3 pt-3 ${theme.bg}`} role="tablist" aria-label="Open skills">
             {tabs.length === 0 ? (
               <div className={`text-sm ${theme.subtext} px-2 py-1`}>Open a skill from the Explorer…</div>
             ) : (
