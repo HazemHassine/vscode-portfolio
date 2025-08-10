@@ -1,6 +1,8 @@
-# About Me
+# Mohamed Hazem Hassine
 
-I’m a Computer Science graduate with a passion for data, coding in Python, and exploring machine learning.
+## About Me
+
+I'm a Computer Science graduate with a passion for data, coding in Python, and exploring machine learning.
 
 ## Core Interests
 -   **Data Science & Machine Learning:** My experience includes conducting research in Federated Learning and leading AI-focused workshops.
