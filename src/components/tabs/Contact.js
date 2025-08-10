@@ -1,19 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 export default function Contact() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState(null);
   const [showHint, setShowHint] = useState(null);
 
-  const nameRef = useRef(null);
-  const emailRef = useRef(null);
-
   const handleChange = (field, value) => {
-    setForm({ ...form, [field]: value });
+    setForm((s) => ({ ...s, [field]: value }));
     setShowHint(field);
   };
 
@@ -26,10 +19,7 @@ export default function Contact() {
 
   const handleSubmit = async () => {
     const error = validate();
-    if (error) {
-      setStatus({ type: "error", text: error });
-      return;
-    }
+    if (error) return setStatus({ type: "error", text: error });
 
     try {
       const res = await fetch("/api/send-email", {
@@ -37,75 +27,75 @@ export default function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
-      if (res.ok) {
-        setStatus({ type: "success", text: "Email sent successfully!" });
-        setForm({ name: "", email: "", message: "" });
-      } else {
-        throw new Error();
-      }
+      if (!res.ok) throw new Error();
+      setStatus({ type: "success", text: "Email sent successfully!" });
+      setForm({ name: "", email: "", message: "" });
     } catch {
       setStatus({ type: "error", text: "Failed to send email." });
     }
   };
 
   useEffect(() => {
-    if (showHint) {
-      const timer = setTimeout(() => setShowHint(null), 2000);
-      return () => clearTimeout(timer);
-    }
+    if (!showHint) return;
+    const t = setTimeout(() => setShowHint(null), 2000);
+    return () => clearTimeout(t);
   }, [showHint]);
 
-  const lineNumbers = ["1", "2", "3", "4", "5"];
-
-  // Function to dynamically set width based on text length
+  // Auto-grow inputs to feel like inline edits in VS Code
   const getInputStyle = (field, placeholder) => {
     const text = form[field] || placeholder;
+    // +1ch so the caret has breathing room
     return { width: `${Math.max(text.length, placeholder.length) + 1}ch` };
   };
+
+  const lineNumbers = ["1", "2", "3", "4", "5"];
 
   return (
     <div className="bg-[#1e1e1e] text-[#d4d4d4] font-mono rounded-lg shadow-lg relative overflow-hidden">
       <div className="flex">
-        {/* Line numbers */}
+        {/* Gutter / line numbers */}
         <div className="bg-[#252526] text-[#858585] text-right pr-4 select-none pt-4">
           {lineNumbers.map((n) => (
             <div key={n} className="h-6">{n}</div>
           ))}
         </div>
 
-        {/* Editable JSON */}
+        {/* Editor area */}
         <div className="flex-1 p-4">
           <pre className="whitespace-pre-wrap leading-6">
             {"{\n"}
-            &nbsp;&nbsp;<span className="text-yellow-400">"name"</span>: "
+            &nbsp;&nbsp;<span className="text-yellow-400">&quot;name&quot;</span>: &quot;
             <input
-              ref={nameRef}
+              aria-label="name"
               className="bg-transparent border-none outline-none text-green-400"
               style={getInputStyle("name", "Your Name")}
               value={form.name}
               onChange={(e) => handleChange("name", e.target.value)}
               placeholder="Your Name"
-            />",
+            />
+            &quot;,
             {"\n"}
-            &nbsp;&nbsp;<span className="text-yellow-400">"email"</span>: "
+            &nbsp;&nbsp;<span className="text-yellow-400">&quot;email&quot;</span>: &quot;
             <input
-              ref={emailRef}
+              aria-label="email"
               className="bg-transparent border-none outline-none text-green-400"
               style={getInputStyle("email", "you@example.com")}
               value={form.email}
               onChange={(e) => handleChange("email", e.target.value)}
               placeholder="you@example.com"
-            />",
+            />
+            &quot;,
             {"\n"}
-            &nbsp;&nbsp;<span className="text-yellow-400">"message"</span>: "
+            &nbsp;&nbsp;<span className="text-yellow-400">&quot;message&quot;</span>: &quot;
             <textarea
+              aria-label="message"
               className="align-middle bg-transparent border-none outline-none text-green-400 w-full resize-none"
               value={form.message}
               onChange={(e) => handleChange("message", e.target.value)}
               placeholder="Write your message here..."
               rows={3}
-            />"
+            />
+            &quot;
             {"\n"}
             {"}"}
           </pre>
@@ -116,11 +106,12 @@ export default function Contact() {
       <button
         onClick={handleSubmit}
         className="absolute top-2 right-2 text-sm bg-[#007acc] px-3 py-1 rounded hover:bg-[#0894ff]"
+        aria-label="Save"
       >
         Save
       </button>
 
-      {/* IntelliSense tooltip */}
+      {/* Fake IntelliSense tooltip */}
       {showHint && (
         <div className="absolute left-16 top-10 bg-[#252526] text-[#d4d4d4] text-sm px-3 py-2 rounded shadow-lg border border-[#3c3c3c]">
           {showHint === "name" && "string • The sender's full name"}
@@ -129,9 +120,10 @@ export default function Contact() {
         </div>
       )}
 
-      {/* Status notification */}
+      {/* Status notification (VS Code-style toast) */}
       {status && (
         <div
+          role="status"
           className={`absolute bottom-2 right-2 px-3 py-2 rounded shadow-md ${
             status.type === "success" ? "bg-green-600" : "bg-red-600"
           }`}
