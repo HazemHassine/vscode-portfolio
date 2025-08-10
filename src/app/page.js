@@ -74,9 +74,9 @@ const fileComponentMap = {
     icon: <DiReactIcon className="text-sky-400" />,
     content: <Skills />,
   },
-  'Contact.jsx': {
-    id: 'contact.jsx',
-    title: 'Contact.jsx',
+  'Contact.json': {
+    id: 'contact.json',
+    title: 'Contact.json',
     icon: <DiReactIcon className="text-sky-400" />,
     content: <Contact />,
   },
