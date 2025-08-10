@@ -1,100 +1,90 @@
-# VSCode Style Portfolio
+# VS Code Style Portfolio
 
-A personal portfolio website styled to look and feel like Visual Studio Code.
-
----
-
-## Overview
-
-This project is a developer portfolio that mimics the familiar VSCode interface in the browser. It features a sidebar file explorer, tabbed code editor panes, and a mock terminal, all driven by Next.js and styled with Tailwind CSS.
+A **personal developer portfolio** that looks and feels like working inside **Visual Studio Code** – complete with a sidebar file explorer, tabbed editor, syntax highlighting, and a mock terminal.
+Built with **Next.js** and **Tailwind CSS**, it’s designed to showcase projects and skills in an immersive, developer-friendly environment.
 
 ---
 
-## Technologies & Libraries
+## 🚀 Overview
 
-- **Next.js** (`next@15.3.4`) – React framework for routing, server-side rendering, and static exports  
-- **React** (`react@^19.0.0` & `react-dom@^19.0.0`) – Component library to build interactive UI  
-- **@headlessui/react** – Unstyled, accessible UI components  
-- **@monaco-editor/react** – Embeddable VSCode editor component  
-- **@vscode/codicons** – Official VSCode icon set  
-- **github-markdown-css** – GitHub-style Markdown rendering  
-- **http-proxy-middleware** – API proxy support during development  
-- **katex**, **rehype-katex**, **remark-math** – Math rendering in Markdown  
-- **react-markdown**, **remark-gfm** – Markdown parsing and GitHub Flavored Markdown support  
-- **react-icons** – Collection of popular icon packs  
-- **react-resizable-panels** – Resizable split‐pane layouts  
-- **react-transition-group** – Animation utilities for React  
-- **Tailwind CSS** (`tailwindcss@^4.1.10`) with:
-  - **@tailwindcss/typography** – Prose styling for Markdown
-  - **@tailwindcss/postcss** – PostCSS plugin integration  
-- **ESLint** & **eslint-config-next** – Linting and code quality  
+This portfolio recreates the **VS Code experience** in the browser, transforming a standard portfolio into an interactive workspace.
+Key features include:
+
+* **Sidebar File Explorer** – Navigate between “files” such as `About.md`, `Skills.jsx`, or `contact.json`.
+* **Tabbed Editor Interface** – Each file opens in a tab, complete with syntax highlighting and editable components.
+* **Integrated Mock Terminal** – Adds authenticity to the coding environment.
+* **Markdown & Code Rendering** – Supports GitHub-style Markdown, math formulas, and code previews.
+* **Themed UI** – Styled to match VS Code’s dark theme, including icons and animations.
 
 ---
 
-## Getting Started
+## 🛠 Tech Stack
+
+**Frameworks & Libraries**
+
+* [Next.js](https://nextjs.org/) – Routing, server-side rendering, static export
+* [React](https://reactjs.org/) – Component-based UI
+* [Tailwind CSS](https://tailwindcss.com/) – Utility-first styling
+* [@headlessui/react](https://headlessui.dev/) – Accessible, unstyled UI components
+* [@monaco-editor/react](https://github.com/suren-atoyan/monaco-react) – Embedded VS Code editor
+* [@vscode/codicons](https://github.com/microsoft/vscode-codicons) – Official VS Code icon set
+
+**Content Rendering**
+
+* `react-markdown`, `remark-gfm` – GitHub Flavored Markdown
+* `katex`, `rehype-katex`, `remark-math` – Math typesetting
+* `github-markdown-css` – GitHub-style Markdown styling
+
+**UI & Interaction**
+
+* `react-icons` – Icon packs
+* `react-resizable-panels` – Resizable layouts
+* `react-transition-group` – Animations
+
+**Tooling**
+
+* ESLint & `eslint-config-next` – Code quality
+* `http-proxy-middleware` – API proxy in development
+
+---
+
+## ⚡ Getting Started
 
 ### Prerequisites
 
-- Node.js v14 or higher  
-- npm, yarn, pnpm, or bun  
+* Node.js v14+
+* npm, yarn, pnpm, or bun
 
 ### Installation
 
-1. Clone the repo  
-   ```bash
-   git clone https://github.com/HazemHassine/vscode-portfolio.git
-   cd vscode-portfolio
-````
+```bash
+git clone https://github.com/HazemHassine/vscode-portfolio.git
+cd vscode-portfolio
+npm install
+# or: yarn / pnpm install / bun install
+```
 
-2. Install dependencies
-
-   ```bash
-   npm install
-   # or
-   yarn
-   # or
-   pnpm install
-   # or
-   bun install
-   ```
-
----
-
-## Running Locally
-
-Start the development server:
+### Local Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# or: yarn dev / pnpm dev / bun dev
 ```
 
-Open your browser at [http://localhost:3000](http://localhost:3000). The site will hot-reload as you edit files.
+Then open [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## Deployment
+## 🌐 Deployment
 
-This site is ready for static export or Vercel deployment:
+**Vercel (Recommended)**
 
-* **Vercel**
+1. Connect this repo in your [Vercel dashboard](https://vercel.com/dashboard).
+2. Push to `main` or `master` – Vercel will auto-deploy.
 
-  1. Connect the GitHub repo in your Vercel dashboard.
-  2. Vercel auto-detects Next.js and deploys on push.
+**Static Export**
 
-* **Static Export**
-
-  ```bash
-  npm run build
-  npm run export
-  ```
----
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+```bash
+npm run build
+npm run export
+```
