@@ -39,7 +39,7 @@ function SectionHeader({ title, isOpen, onToggle }) {
 function Row({ icon, label, value, onClick, href, title }) {
   const core = (
     <div
-      className={`flex items-start gap-2 px-2 py-[6px] rounded-[2px] outline outline-0 hover:outline-1 hover:outline-[var(--vscode-tab-active-top-border-color)] transition-[outline] ${
+      className={`flex items-start gap-2 px-2 py-[6px] rounded-[2px] outline-0 hover:outline-1 hover:outline-[var(--vscode-tab-active-top-border-color)] transition-[outline] ${
         onClick || href ? "cursor-pointer hover:bg-[var(--vscode-list-hover-background)]" : ""
       }`}
       title={title}
