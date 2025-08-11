@@ -110,118 +110,187 @@ const initialExplorerData = [
   },
   {
     type: "folder",
-    name: "src",
+    name: "Portfolio",
     children: [
-      {
-        type: "folder",
-        name: "components",
-        children: [
-          { type: "file", name: "Header.jsx" },
-          { type: "file", name: "Footer.jsx" },
-          { type: "file", name: "Navbar.jsx" },
-        ]
-      },
-      {
-        type: "folder",
-        name: "pages",
-        children: [
-          { type: "file", name: "Home.jsx" },
-          { type: "file", name: "About.jsx" },
-          { type: "file", name: "Contact.jsx" },
-        ]
-      },
-      {
-        type: "folder",
-        name: "utils",
-        children: [
-          { type: "file", name: "helpers.js" },
-          { type: "file", name: "constants.js" },
-        ]
-      },
-      { type: "file", name: "App.jsx" },
-      { type: "file", name: "index.js" },
+      { type: "file", name: "About.md" },
+      { type: "file", name: "Contact.json" },
+      { type: "file", name: "Projects.jsx" },
+      { type: "file", name: "Skills.jsx" },
+      { type: "file", name: "Work.ipynb" },
     ],
   },
-  {
-    type: "folder",
-    name: "public",
-    children: [
-      { type: "file", name: "index.html" },
-      { type: "file", name: "favicon.ico" },
-      { type: "file", name: "manifest.json" },
-    ],
-  },
-  {
-    type: "folder",
-    name: "node_modules",
-    children: [
-      { type: "folder", name: "react", children: [] },
-      { type: "folder", name: "react-dom", children: [] },
-      { type: "folder", name: "webpack", children: [] },
-      { type: "folder", name: "babel", children: [] },
-    ],
-  },
-  { type: "file", name: "package.json" },
-  { type: "file", name: "package-lock.json" },
-  { type: "file", name: "README.md" },
+  { type: "file", name: "config.json" },
   { type: "file", name: ".gitignore" },
-  { type: "file", name: ".env" },
-  { type: "file", name: "tailwind.config.js" },
-  { type: "file", name: "postcss.config.js" },
+  { type: "file", name: "README.md" },
 ];
 
 // File contents
 const fileContents = {
-  'package.json': `{
-  "name": "portfolio-app",
-  "version": "1.0.0",
-  "description": "A modern portfolio website",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "dev": "npm start"
+  'config.json': `{
+  "theme": "vscode-dark",
+  "fontSize": 14,
+  "fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+  "tabSize": 2,
+  "wordWrap": "on",
+  "lineNumbers": "on",
+  "explorer": {
+    "confirmDragAndDrop": false,
+    "iconTheme": "vscode-icons"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.0"
+  "workbench": {
+    "colorTheme": "Default Dark+",
+    "activityBar": {
+      "visible": true
+    },
+    "statusBar": {
+      "visible": true
+    }
   }
 }`,
-  'README.md': `# Portfolio App
+  'README.md': `# VS Code Style Portfolio
 
-A modern, responsive portfolio website built with React and Tailwind CSS.
+A **personal developer portfolio** that looks and feels like working inside **Visual Studio Code** – complete with a sidebar file explorer, tabbed editor, syntax highlighting, and a mock terminal.
+Built with **Next.js** and **Tailwind CSS**, it’s designed to showcase projects and skills in an immersive, developer-friendly environment.
 
-## Getting Started
+---
 
-1. Install dependencies: \`npm install\`
-2. Start development server: \`npm start\`
-3. Build for production: \`npm run build\`
+## 🚀 Overview
 
-## Features
+This portfolio recreates the **VS Code experience** in the browser, transforming a standard portfolio into an interactive workspace.
+Key features include:
 
-- Responsive design
-- Modern UI components
-- Fast performance
-- SEO optimized`,
-  '.gitignore': `node_modules/
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-build/
+* **Sidebar File Explorer** – Navigate between “files” such as 'About.md', 'Skills.jsx', or 'contact.json'.
+* **Tabbed Editor Interface** – Each file opens in a tab, complete with syntax highlighting and editable components.
+* **Integrated Mock Terminal** – Adds authenticity to the coding environment.
+* **Markdown & Code Rendering** – Supports GitHub-style Markdown, math formulas, and code previews.
+* **Themed UI** – Styled to match VS Code’s dark theme, including icons and animations.
+
+---
+
+## 🛠 Tech Stack
+
+**Frameworks & Libraries**
+
+* [Next.js](https://nextjs.org/) – Routing, server-side rendering, static export
+* [React](https://reactjs.org/) – Component-based UI
+* [Tailwind CSS](https://tailwindcss.com/) – Utility-first styling
+* [@headlessui/react](https://headlessui.dev/) – Accessible, unstyled UI components
+* [@monaco-editor/react](https://github.com/suren-atoyan/monaco-react) – Embedded VS Code editor
+* [@vscode/codicons](https://github.com/microsoft/vscode-codicons) – Official VS Code icon set
+
+**Content Rendering**
+
+* 'react-markdown', 'remark-gfm' – GitHub Flavored Markdown
+* 'katex', 'rehype-katex', 'remark-math' – Math typesetting
+* 'github-markdown-css' – GitHub-style Markdown styling
+
+**UI & Interaction**
+
+* 'react-icons' – Icon packs
+* 'react-resizable-panels' – Resizable layouts
+* 'react-transition-group' – Animations
+
+**Tooling**
+
+* ESLint & 'eslint-config-next' – Code quality
+* 'http-proxy-middleware' – API proxy in development
+
+---
+
+## ⚡ Getting Started
+
+### Prerequisites
+
+* Node.js v14+
+* npm, yarn, pnpm, or bun
+
+### Installation
+
+bash
+git clone https://github.com/HazemHassine/vscode-portfolio.git
+cd vscode-portfolio
+npm install
+# or: yarn / pnpm install / bun install
+
+### Local Development
+
+bash
+npm run dev
+# or: yarn dev / pnpm dev / bun dev
+
+Then open [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 🌐 Deployment
+
+**Vercel (Recommended)**
+
+1. Connect this repo in your [Vercel dashboard](https://vercel.com/dashboard).
+2. Push to 'main' or 'master' – Vercel will auto-deploy.
+
+**Static Export**
+
+bash
+npm run build
+npm run export`,
+  '.gitignore': `
+# Important stuff
+life_secrets.txt
+.all_my_api_keys.env
+the_meaning_of_life/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
 dist/
-.DS_Store`,
-  '.env': `REACT_APP_API_URL=http://localhost:3001
-NODE_ENV=development`,
+build/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Env
+.env*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Coverage
+coverage/`,
+  'About.md': `# Mohamed Hazem Hassine
+
+## About Me
+
+I'm a Computer Science graduate with a passion for data, coding in Python, and exploring machine learning.
+
+## Core Interests
+-   **Data Science & Machine Learning:** My experience includes conducting research in Federated Learning and leading AI-focused workshops.
+-   **Software Development:** I have a strong background as an Information System Specialist in the Government and regulations sectors.
+-   **Problem Solving:** I enjoy using data to solve practical problems and my goal is to work on Energy, Physics and Climate-related world-changing solutions.
+
+## Highlights
+-   **Federated Learning Research:** Explored cutting-edge techniques and implemented multiple approaches for computer vision tasks.
+-   **AI Workshop Leadership:** Led workshops focused on artificial intelligence concepts and applications.
+-   **Information Systems Specialist:** Maintained and optimized internal information systems, trained over 100 staff members, and automated data-related tasks.
+`,
 };
 
 // Convert the initial explorer data into our desired file system structure
 const fileSystem = {
   home: {
     hazem: {
-      'portfolio-app': convertExplorerDataToFileSystem(initialExplorerData),
+      'portfolio': convertExplorerDataToFileSystem(initialExplorerData),
       documents: {
         'resume.pdf': 'My professional resume.',
         'notes.txt': 'Some personal notes.',
@@ -334,7 +403,7 @@ const TerminalView = () => {
     { type: 'info', text: 'Welcome to VS Code Terminal! Type "help" to see available commands.' }
   ]);
   const [input, setInput] = useState('');
-  const [cwd, setCwd] = useState('/home/hazem/portfolio-app');
+  const [cwd, setCwd] = useState('/home/hazem/portfolio');
   const [commandHistory, setCommandHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const contentRef = useRef(null);
@@ -357,7 +426,7 @@ const TerminalView = () => {
 
   // Get current git branch (simulated)
   const getCurrentGitBranch = () => {
-    if (cwd.includes('portfolio-app')) {
+    if (cwd.includes('portfolio')) {
       return 'main';
     }
     return null;
@@ -536,29 +605,20 @@ const TerminalView = () => {
     },
 
     tree: () => {
-      if (cwd.includes('portfolio-app')) {
+      if (cwd.includes('portfolio')) {
         return [
           '.',
-          '├── src/',
-          '│   ├── components/',
-          '│   │   ├── Header.jsx',
-          '│   │   ├── Footer.jsx',
-          '│   │   └── Navbar.jsx',
-          '│   ├── pages/',
-          '│   │   ├── Home.jsx',
-          '│   │   ├── About.jsx',
-          '│   │   └── Contact.jsx',
-          '│   ├── App.jsx',
-          '│   └── index.js',
-          '├── public/',
-          '│   ├── index.html',
-          '│   ├── favicon.ico',
-          '│   └── manifest.json',
-          '├── package.json',
-          '├── README.md',
-          '└── .gitignore',
+          '├── config.json',
+          '├── .gitignore',
+          '├── Portfolio/',
+          '│   ├── About.md',
+          '│   ├── Contact.json',
+          '│   ├── Projects.jsx',
+          '│   ├── Skills.jsx',
+          '│   └── Work.ipynb',
+          '└── README.md',
           '',
-          '5 directories, 12 files'
+          '1 directory, 7 files'
         ];
       }
       return ['tree: command not found in this directory'];
@@ -566,7 +626,7 @@ const TerminalView = () => {
 
     // Git commands
     'git status': () => {
-      if (!cwd.includes('portfolio-app')) {
+      if (!cwd.includes('portfolio')) {
         return ['fatal: not a git repository (or any of the parent directories): .git'];
       }
       return [
@@ -577,78 +637,76 @@ const TerminalView = () => {
         '  (use "git add <file>..." to update what will be committed)',
         '  (use "git checkout -- <file>..." to discard changes in working directory)',
         '',
-        '        modified:   src/App.jsx',
-        '        modified:   src/components/Header.jsx',
+        '        modified:   Portfolio/About.md',
+        '        modified:   Portfolio/Contact.json',
         '',
         'Untracked files:',
         '  (use "git add <file>..." to include in what will be committed)',
         '',
-        '        src/components/NewComponent.jsx',
+        '        Portfolio/Work.ipynb',
         '',
         'no changes added to commit (use "git add" and/or "git commit -a")'
       ];
     },
 
     'git log': () => {
-      if (!cwd.includes('portfolio-app')) {
+      if (!cwd.includes('portfolio')) {
         return ['fatal: not a git repository (or any of the parent directories): .git'];
       }
       return [
         'commit a1b2c3d4e5f6789012345678901234567890abcd (HEAD -> main, origin/main)',
-        'Author: Hazem <hazemhassine.edu@gmail.com>',
+        'Author: Hazem <hazem@example.com>',
         'Date:   Mon Jan 15 10:30:00 2024 +0100',
         '',
-        '    Update portfolio components and styling',
+        '    Update portfolio content and add Jupyter notebook',
         '',
         'commit f6e5d4c3b2a1098765432109876543210987fedc',
-        'Author: Hazem <hazemhassine.edu@gmail.com>',
+        'Author: Hazem <hazem@example.com>',
         'Date:   Sun Jan 14 15:20:00 2024 +0100',
         '',
-        '    Initial commit with basic portfolio structure'
+        '    Initial commit with portfolio structure'
       ];
     },
 
     'git branch': () => {
-      if (!cwd.includes('portfolio-app')) {
+      if (!cwd.includes('portfolio')) {
         return ['fatal: not a git repository (or any of the parent directories): .git'];
       }
       return [
         '  develop',
-        '  feature/new-design',
+        '  feature/jupyter-integration',
         '* main'
       ];
     },
 
     'git diff': () => {
-      if (!cwd.includes('portfolio-app')) {
+      if (!cwd.includes('portfolio')) {
         return ['fatal: not a git repository (or any of the parent directories): .git'];
       }
       return [
-        'diff --git a/src/App.jsx b/src/App.jsx',
+        'diff --git a/Portfolio/About.md b/Portfolio/About.md',
         'index 1234567..abcdefg 100644',
-        '--- a/src/App.jsx',
-        '+++ b/src/App.jsx',
-        '@@ -10,7 +10,7 @@ function App() {',
-        '   return (',
-        '     <div className="App">',
-        '       <Header />',
-        '-      <main className="container">',
-        '+      <main className="container mx-auto px-4">',
-        '         <Routes>',
-        '           <Route path="/" element={<Home />} />',
-        '           <Route path="/about" element={<About />} />'
+        '--- a/Portfolio/About.md',
+        '+++ b/Portfolio/About.md',
+        '@@ -5,7 +5,7 @@ I\'m a passionate full-stack developer with a love for creating innovative web',
+        ' ### Background',
+        ' ',
+        '- 🎓 Computer Science graduate with 3+ years of professional experience',
+        '-- 💻 Specialized in React, Node.js, and modern web technologies',
+        '+- 💻 Specialized in React, Node.js, Python, and modern web technologies',
+        '- 🌟 Always eager to learn new technologies and best practices'
       ];
     },
 
     'git add .': () => {
-      if (!cwd.includes('portfolio-app')) {
+      if (!cwd.includes('portfolio')) {
         return ['fatal: not a git repository (or any of the parent directories): .git'];
       }
       return []; // Silent success
     },
 
     'git commit -m': (args) => {
-      if (!cwd.includes('portfolio-app')) {
+      if (!cwd.includes('portfolio')) {
         return ['fatal: not a git repository (or any of the parent directories): .git'];
       }
       if (args.length === 0) {
@@ -657,13 +715,13 @@ const TerminalView = () => {
       const message = args.join(' ').replace(/['"]/g, '');
       return [
         `[main ${Math.random().toString(36).substr(2, 7)}] ${message}`,
-        ' 2 files changed, 15 insertions(+), 8 deletions(-)',
-        ' create mode 100644 src/components/NewComponent.jsx'
+        ' 3 files changed, 18 insertions(+), 5 deletions(-)',
+        ' create mode 100644 Portfolio/Work.ipynb'
       ];
     },
 
     'git push': () => {
-      if (!cwd.includes('portfolio-app')) {
+      if (!cwd.includes('portfolio')) {
         return ['fatal: not a git repository (or any of the parent directories): .git'];
       }
       return [
@@ -673,13 +731,13 @@ const TerminalView = () => {
         'Compressing objects: 100% (4/4), done.',
         'Writing objects: 100% (5/5), 567 bytes | 567.00 KiB/s, done.',
         'Total 5 (delta 2), reused 0 (delta 0), pack-reused 0',
-        'To github.com:hazem/portfolio-app.git',
+        'To github.com:hazem/portfolio.git',
         '   a1b2c3d..e4f5g6h  main -> main'
       ];
     },
 
     'git pull': () => {
-      if (!cwd.includes('portfolio-app')) {
+      if (!cwd.includes('portfolio')) {
         return ['fatal: not a git repository (or any of the parent directories): .git'];
       }
       return [
@@ -689,90 +747,19 @@ const TerminalView = () => {
 
     // NPM commands
     'npm install': () => {
-      if (!getFileContent(resolvePath(cwd, 'package.json'), fileSystem)) {
-        return ['npm ERR! ENOENT: no such file or directory, open \'package.json\''];
-      }
-      return [
-        '',
-        '> portfolio-app@1.0.0 install',
-        '',
-        'npm WARN deprecated babel-eslint@10.1.0: babel-eslint is now @babel/eslint-parser',
-        'npm WARN deprecated core-js@2.6.12: core-js@<3.23.3 is no longer maintained',
-        '',
-        'added 1452 packages, and audited 1453 packages in 23s',
-        '',
-        '247 packages are looking for funding',
-        '  run `npm fund` for details',
-        '',
-        'found 0 vulnerabilities'
-      ];
+      return ['npm: command not found - this is not a Node.js project'];
     },
 
     'npm start': () => {
-      if (!getFileContent(resolvePath(cwd, 'package.json'), fileSystem)) {
-        return ['npm ERR! ENOENT: no such file or directory, open \'package.json\''];
-      }
-      return [
-        '',
-        '> portfolio-app@1.0.0 start',
-        '> react-scripts start',
-        '',
-        'Starting the development server...',
-        '',
-        'Compiled successfully!',
-        '',
-        'You can now view portfolio-app in the browser.',
-        '',
-        '  Local:            http://localhost:3000',
-        '  On Your Network:  http://192.168.1.100:3000',
-        '',
-        'Note that the development build is not optimized.',
-        'To create a production build, use npm run build.'
-      ];
+      return ['npm: command not found - this is not a Node.js project'];
     },
 
     'npm run build': () => {
-      if (!getFileContent(resolvePath(cwd, 'package.json'), fileSystem)) {
-        return ['npm ERR! ENOENT: no such file or directory, open \'package.json\''];
-      }
-      return [
-        '',
-        '> portfolio-app@1.0.0 build',
-        '> react-scripts build',
-        '',
-        'Creating an optimized production build...',
-        'Compiled successfully.',
-        '',
-        'File sizes after gzip:',
-        '',
-        '  47.2 KB  build/static/js/main.a1b2c3d4.js',
-        '  2.1 KB   build/static/css/main.e4f5g6h7.css',
-        '',
-        'The project was built assuming it is hosted at /',
-        'You can control this with the homepage field in your package.json.',
-        '',
-        'The build folder is ready to be deployed.'
-      ];
+      return ['npm: command not found - this is not a Node.js project'];
     },
 
     'npm test': () => {
-      return [
-        '',
-        '> portfolio-app@1.0.0 test',
-        '> react-scripts test --watchAll=false',
-        '',
-        'PASS src/App.test.js',
-        '  ✓ renders learn react link (25ms)',
-        '',
-        'PASS src/components/Header.test.js',
-        '  ✓ renders header component (15ms)',
-        '',
-        'Test Suites: 2 passed, 2 total',
-        'Tests:       2 passed, 2 total',
-        'Snapshots:   0 total',
-        'Time:        1.234s',
-        'Ran all test suites.'
-      ];
+      return ['npm: command not found - this is not a Node.js project'];
     },
 
     'npm --version': () => ['9.6.7'],
