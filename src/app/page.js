@@ -10,7 +10,7 @@ import TabBar from '@/components/TabBar';
 import StatusBar from '@/components/StatusBar';
 import ContentArea from '@/components/ContentArea';
 import ActivityBar from '@/components/ActivityBar';
-import { VscMarkdown, VscJson, VscBook } from 'react-icons/vsc';
+import { VscMarkdown, VscJson, VscBook, VscFileCode } from 'react-icons/vsc';
 import { DiReact as DiReactIcon } from 'react-icons/di';
 import Skills from '@/components/tabs/Skills';
 import Contact from '@/components/tabs/Contact';
@@ -19,6 +19,7 @@ import MarkdownEditorViewer from '@/components/tabs/MarkdownEditorViewer';
 import TerminalView from '@/components/TerminalView';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import AccountPage from '@/components/AccountPage';
+import GitIgnore from '@/components/tabs/GitIgnore';
 
 // Component mapping
 const fileComponentMap = {
@@ -44,7 +45,7 @@ const fileComponentMap = {
     id: 'readme.md',
     title: 'README.md',
     icon: <VscMarkdown className="text-[var(--vscode-text-secondary)]" />,
-    content: <MarkdownEditorViewer id={'readme'} />,
+    content: <MarkdownEditorViewer id={'readme'} filePath='/markdown/README.md' />,
   },
   'config.json': {
     id: 'config.json',
@@ -78,8 +79,14 @@ const fileComponentMap = {
   'Contact.json': {
     id: 'contact.json',
     title: 'Contact.json',
-    icon: <DiReactIcon className="text-sky-400" />,
+    icon: <VscJson className="text-orange-400" />,
     content: <Contact />,
+  },
+  '.gitignore': {
+    id: '.gitignore',
+    title: '.gitignore',
+    icon: <VscFileCode/>,
+    content: <GitIgnore />,
   },
 };
 

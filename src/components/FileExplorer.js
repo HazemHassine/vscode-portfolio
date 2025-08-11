@@ -49,7 +49,7 @@ const initialExplorerData = [
       { type: "file", name: "Projects.jsx", icon: <VscFileCode /> },
       { type: "file", name: "Work.ipynb", icon: <VscBook className="text-orange-400" /> },
       { type: "file", name: "Skills.jsx", icon: <VscFileCode />, gitStatus: "modified" },
-      { type: "file", name: "Contact.json", icon: <VscMarkdown /> },
+      { type: "file", name: "Contact.json", icon: <VscJson className="text-orange-400"/> },
     ],
   },
   {

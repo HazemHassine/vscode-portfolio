@@ -48,7 +48,7 @@ export default function Contact() {
     return { width: `${Math.max(text.length, placeholder.length) + 1}ch` };
   };
 
-  const lineNumbers = ["1", "2", "3", "4", "5"];
+  const lineNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
   return (
     <div className="bg-[#1e1e1e] text-[#d4d4d4] font-mono rounded-lg shadow-lg relative overflow-hidden">
@@ -105,7 +105,7 @@ export default function Contact() {
       {/* Save button */}
       <button
         onClick={handleSubmit}
-        className="absolute top-2 right-2 text-sm bg-[#007acc] px-3 py-1 rounded hover:bg-[#0894ff]"
+        className="absolute cursor-pointer m-2 top-2 right-2 text-sm bg-[#007acc] px-3 py-1 rounded hover:bg-[#0894ff]"
         aria-label="Save"
       >
         Save
