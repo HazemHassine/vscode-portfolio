@@ -9,7 +9,9 @@ import {
   VscExtensions,
   VscAccount,
   VscSettingsGear,
+  VscMention,
 } from "react-icons/vsc";
+import { LuBotMessageSquare } from "react-icons/lu";
 
 const settingsMenuItems = [
   { label: "Command Palette...", shortcut: "Ctrl+Shift+P", dividerAfter: true },
@@ -53,16 +55,16 @@ const SettingsMenuItem = React.memo(({ item }) => (
         )}
       </span>
       {item.hasSubmenu && (
-          <svg
-            className="w-3 h-3 ml-auto text-[var(--vscode-text-secondary)]"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
-          </svg>
-        )}
+        <svg
+          className="w-3 h-3 ml-auto text-[var(--vscode-text-secondary)]"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 6l6 6-6 6" />
+        </svg>
+      )}
     </button>
     {item.dividerAfter && (
       <div className="border-t border-[var(--vscode-border-color)] mx-2" />
@@ -99,8 +101,7 @@ const ActivityBar = ({ onIconClick, activeIcon }) => {
     { id: "search", Icon: VscSearch },
     { id: "explorer", Icon: VscFiles },
     { id: "scm", Icon: VscSourceControl, badge: 2 },
-    // { id: "debug", Icon: VscDebugAlt },
-    // { id: "extensions", Icon: VscExtensions, badge: 1 },
+    { id: "chatbot", Icon: LuBotMessageSquare }
   ];
   // bottom icons, including settings
   const bottomItems = [
@@ -125,7 +126,7 @@ const ActivityBar = ({ onIconClick, activeIcon }) => {
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
 
-  const handleIconClick = (id) => { 
+  const handleIconClick = (id) => {
     if (id === "settings") {
       setSettingsOpen((open) => !open);
     } else {

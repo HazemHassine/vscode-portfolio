@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@headlessui/react": "^2.2.4",
     "@monaco-editor/react": "^4.7.0",
     "@vscode/codicons": "^0.0.36",

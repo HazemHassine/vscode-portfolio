@@ -20,6 +20,7 @@ import TerminalView from '@/components/TerminalView';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import AccountPage from '@/components/AccountPage';
 import GitIgnore from '@/components/tabs/GitIgnore';
+import ChatBotPanel from '@/components/ChatBotPanel';
 
 // Component mapping
 const fileComponentMap = {
@@ -52,23 +53,23 @@ const fileComponentMap = {
     title: 'config.json',
     icon: <VscJson className="text-yellow-400" />,
     content:
-        JSON.stringify({ 
-          "theme": "vscode-dark",
-          "fontSize": 14,
-          "fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
-          "tabSize": 2,
-          "wordWrap": "on",
-          "lineNumbers": "on",
-          "explorer": {
-            "confirmDragAndDrop": false,
-            "iconTheme": "vscode-icons"
-          },
-          "workbench": {
-            "colorTheme": "Default Dark+",
-            "activityBar": { "visible": true },
-            "statusBar": { "visible": true }
-          }
-        }, null, 2)
+      JSON.stringify({
+        "theme": "vscode-dark",
+        "fontSize": 14,
+        "fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+        "tabSize": 2,
+        "wordWrap": "on",
+        "lineNumbers": "on",
+        "explorer": {
+          "confirmDragAndDrop": false,
+          "iconTheme": "vscode-icons"
+        },
+        "workbench": {
+          "colorTheme": "Default Dark+",
+          "activityBar": { "visible": true },
+          "statusBar": { "visible": true }
+        }
+      }, null, 2)
   },
   'Skills.jsx': {
     id: 'skills.jsx',
@@ -85,7 +86,7 @@ const fileComponentMap = {
   '.gitignore': {
     id: '.gitignore',
     title: '.gitignore',
-    icon: <VscFileCode/>,
+    icon: <VscFileCode />,
     content: <GitIgnore />,
   },
 };
@@ -165,6 +166,12 @@ export default function HomePage() {
                   {activePanel === "scm" && <SourceControl />}
                   {activePanel === "search" && <SearchPanel />}
                   {activePanel === "account" && <AccountPage />}
+                  {activePanel === "chatbot" && <ChatBotPanel
+                    title="Portfolio Chat"
+                    botAvatarUrl="https://avatars.githubusercontent.com/HazemHassine"
+                    apiPath="/api/portfolio-chat"
+                  />
+                  }
                 </div>
               </Panel>
               <PanelResizeHandle className="w-1 bg-transparent hover:bg-[var(--vscode-tab-active-top-border-color)] transition-colors" />
