@@ -18,6 +18,7 @@ import WorkNotebook from '@/components/tabs/WorkNotebook';
 import MarkdownEditorViewer from '@/components/tabs/MarkdownEditorViewer';
 import TerminalView from '@/components/TerminalView';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import AccountPage from '@/components/AccountPage';
 
 // Component mapping
 const fileComponentMap = {
@@ -102,7 +103,11 @@ export default function HomePage() {
   };
 
   const handleIconClick = (panelId) => {
-    if (sidePanelVisible && activePanel === panelId) {
+    if (panelId === 'account') {
+      setActivePanel('account');
+      setSidePanelVisible(true);
+    }
+    else if (sidePanelVisible && activePanel === panelId) {
       setSidePanelVisible(false);
     } else {
       setActivePanel(panelId);
@@ -152,6 +157,7 @@ export default function HomePage() {
                   {activePanel === "explorer" && <FileExplorer onFileSelect={handleFileSelect} />}
                   {activePanel === "scm" && <SourceControl />}
                   {activePanel === "search" && <SearchPanel />}
+                  {activePanel === "account" && <AccountPage />}
                 </div>
               </Panel>
               <PanelResizeHandle className="w-1 bg-transparent hover:bg-[var(--vscode-tab-active-top-border-color)] transition-colors" />
