@@ -12,6 +12,8 @@
     "@google/generative-ai": "^0.24.1",
     "@headlessui/react": "^2.2.4",
     "@monaco-editor/react": "^4.7.0",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
     "@vscode/codicons": "^0.0.36",
     "github-markdown-css": "^5.8.1",
     "http-proxy-middleware": "^3.0.5",
