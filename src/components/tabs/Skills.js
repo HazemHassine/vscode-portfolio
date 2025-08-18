@@ -188,7 +188,7 @@ const EditorPanel = ({ name, category }) => {
   const Quote = () => <span>&quot;</span>;
 
   return (
-    <div className={`h-full w-full ${theme.panel} ${theme.border} rounded-b-md p-4`}>
+    <div className={`w-full ${theme.panel} ${theme.border} rounded-b-md p-4`}>
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[#3c3c3c] pb-3 mb-3">
         <div className="flex items-center gap-2">
@@ -292,9 +292,9 @@ const SkillsVSCode = () => {
 
   return (
     <div className={`min-h-screen ${theme.bg} text-white`}>
-      <div className="grid grid-cols-12">
+      <div className="grid grid-cols-12 h-screen">
         {/* Explorer */}
-        <aside className={`col-span-12 md:col-span-3 xl:col-span-2 ${theme.panel} ${theme.border}`} aria-label="Skills Explorer">
+        <aside className={`col-span-12 md:col-span-3 xl:col-span-2 ${theme.panel} ${theme.border} overflow-y-auto`} aria-label="Skills Explorer">
           <div className="px-1 pb-3">
             {Object.entries(RAW_SKILLS).map(([category, items]) => (
               <div key={category} className="mb-2">
@@ -324,9 +324,9 @@ const SkillsVSCode = () => {
         </aside>
 
         {/* Editor area */}
-        <main className="col-span-12 md:col-span-9 xl:col-span-10">
+        <main className="col-span-12 md:col-span-9 xl:col-span-10 flex flex-col">
           {/* Tabs */}
-          <div className={`flex flex-wrap gap-1 px-3 pt-3 ${theme.bg}`} role="tablist" aria-label="Open skills">
+          <div className={`flex-shrink-0 flex flex-wrap gap-1 px-3 pt-3 ${theme.bg}`} role="tablist" aria-label="Open skills">
             {tabs.length === 0 ? (
               <div className={`text-sm ${theme.subtext} px-2 py-1`}>Open a skill from the Explorer…</div>
             ) : (
@@ -343,7 +343,7 @@ const SkillsVSCode = () => {
           </div>
 
           {/* Active editor */}
-          <div className="p-3">
+          <div className="p-3 flex-grow overflow-y-auto">
             {activeTab ? (
               <EditorPanel name={activeTab.title} category={activeTab.category} />
             ) : (

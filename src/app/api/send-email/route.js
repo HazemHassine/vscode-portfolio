@@ -16,11 +16,27 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: "Message must be at least 10 characters." }), { status: 400 });
     }
 
+    const ip = req.ip ?? "N/A";
+    const geo = req.geo ?? {};
+    const userAgent = req.headers.get("user-agent") ?? "N/A";
+
+    const text = `Name: ${name}
+Email: ${email}
+
+Message:
+${message}
+
+---
+IP: ${ip}
+City: ${geo.city ?? "N/A"}
+Country: ${geo.country ?? "N/A"}
+User Agent: ${userAgent}`;
+
     await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: "hazemhassine.edu@gmail.com",
       subject: `New Contact from ${name}`,
-      text: `Email: ${email}\n\nMessage:\n${message}`,
+      text,
     });
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
