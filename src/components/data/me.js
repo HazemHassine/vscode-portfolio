@@ -1,7 +1,7 @@
 export const me = {
   name: "Mohamed Hazem Hassine",
-  title: "AI Engineering student · UX Data Analysis (Werkstudent) · Full-stack-ish",
-  tagline: "I build stylish UIs, AI/ML backends, and UX analytics that turn user behavior into actionable insights.",
+  title: "MSc Intelligent Interactive Systems student · AI-focused software engineer",
+  tagline: "I build agentic AI systems, developer tools, and production-oriented web applications.",
   location: "Germany",
 
   availability: {
@@ -9,13 +9,13 @@ export const me = {
     startDateISO: "2025-08-06",
     weeklyHours: 20,
     openTo: [ "Collaboration"],
-    semesterBreakNote: "Can work full-time during break (Sep 1 – Oct 12, 2025)."
+    semesterBreakNote: ""
   },
 
   summary: [
-    "M.Sc. AI Engineering (University of Passau); admitted to M.Sc. Intelligent Interactive Systems (Bielefeld, starting Oct 2025).",
-    "Focus areas: UX analytics with AI, RL (PPO / Rainbow DQN), Next.js/React/Tailwind, and data pipelines.",
-    "Hands-on with agentic/RAG patterns, classic ML, and production-grade dashboards."
+    "M.Sc. Intelligent Interactive Systems student at Bielefeld University.",
+    "Focus areas: agentic AI architectures, RAG and knowledge systems, reliable AI workflows, and developer tools.",
+    "Building with Python, TypeScript, Next.js, FastAPI, and containerized services."
   ],
 
   interests: ["UX Analytics", "Reinforcement Learning", "Agentic RAG", "Machine Learning", "Visual Analytics"],
@@ -39,14 +39,9 @@ export const me = {
 
   education: [
     {
-      school: "University of Passau",
-      program: "M.Sc. AI Engineering",
-      status: "current"
-    },
-    {
       school: "Bielefeld University",
       program: "M.Sc. Intelligent Interactive Systems",
-      status: "admitted",
+      status: "current",
       startISO: "2025-10"
     }
   ],
@@ -207,8 +202,8 @@ export const me = {
   },
 
   faq: [
-    { q: "Are you available for work?", a: "Yes — open to  collaborations." },
-    { q: "What are you studying?", a: "AI Engineering (Passau); starting IIS (Bielefeld) in Oct 2025." },
+    { q: "Are you available for work?", a: "Yes, open to collaborations." },
+    { q: "What are you studying?", a: "M.Sc. Intelligent Interactive Systems at Bielefeld University." },
     { q: "Which languages do you speak?", a: "Arabic (Native), English (C1), French (C1), German (A2+)." }
   ],
 
